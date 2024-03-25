@@ -5,5 +5,9 @@ export type AvatarMenu = {
   icon: ReactElement;
   handleClick: () => void;
 };
-
-export type Themes = "dark" | "light";
+export type SideBarItem = {
+  id: number;
+  title: string;
+  icons?: ReactElement;
+  path: string | any[];
+};

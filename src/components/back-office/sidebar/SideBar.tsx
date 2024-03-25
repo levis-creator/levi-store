@@ -1,26 +1,24 @@
-import Link from "next/link";
-import React from "react";
-import Image from "next/image";
-import logo from "./logo.png";
-import { ReactElement } from "react";
+"use client";
+import { SideBarItem } from "@/lib/types";
 import {
-  LayoutGrid,
-  Slack,
-  Users,
+  ChevronDown,
+  ChevronRight,
   Compass,
-  User,
+  LayoutGrid,
+  LogOut,
   Settings,
-  Target,
-  Globe,
-  Store,
+  Slack,
   SquareUser,
+  Store,
+  Target,
+  User,
+  Users,
 } from "lucide-react";
-export type SideBarItem = {
-  id: number;
-  title: string;
-  icons?: ReactElement;
-  path: string | any[];
-};
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { ReactElement } from "react";
+import SideDropDown from "./SideDropDown";
 
 export let sideBarLinks: SideBarItem[] = [
   {
@@ -94,16 +92,9 @@ export let sideBarLinks: SideBarItem[] = [
   {
     id: 8,
     title: "Settings",
-    path: "/staff",
+    path: "/settings",
     icons: <Settings />,
   },
-  {
-    id: 10,
-    title: "International",
-    path: "/international",
-    icons: <Globe />,
-  },
-
   {
     id: 9,
     title: "Online Store",
@@ -113,6 +104,25 @@ export let sideBarLinks: SideBarItem[] = [
 ];
 
 const SideBar = () => {
+  const pathname = usePathname();
+  function pathExtractor(path: string): string {
+    const segments = path.split("/");
+    const categoryIndex = segments.indexOf("dashboard") + 1;
+
+    if (categoryIndex >= 0 && categoryIndex < segments.length) {
+      return `/${segments[categoryIndex]}`;
+    }
+
+    return "";
+  }
+  const sideBarItemStyle = (path: string): string => {
+    const pathName = path == "/" ? "/dashboard" : `/dashboard${path}`;
+    if (pathname == pathName) {
+      return "border-l-green-600 text-green-500";
+    } else {
+      return "border-l-transparent";
+    }
+  };
   return (
     <div className="  bg-white text-slate-800  dark:bg-slate-700 space-y-6 w-64 h-screen dark:text-slate-50 fixed left-0 top-0 overflow-y-auto">
       {/* logo */}
@@ -133,20 +143,25 @@ const SideBar = () => {
           <li key={link.id}>
             {typeof link.path == "string" ? (
               <Link
-                href={`/dashboard/${link.path}`}
-                className="flex items-center space-x-3 px-6 py-4 border-l-[6px] border-green-600"
+                href={`/dashboard${link.path}`}
+                className={`flex items-center space-x-3 px-6 py-2 border-l-[6px]  ${sideBarItemStyle(
+                  link.path
+                )}`}
               >
                 {link.icons}
                 <span>{link.title}</span>
               </Link>
             ) : (
-              <a className="flex items-center space-x-3 px-6 py-4 border-l-[6px] border-transparent">
-                {link.icons}
-                <span>{link.title}</span>
-              </a>
+              <SideDropDown data={link} />
             )}
           </li>
         ))}
+        <li className="px-7 py-2">
+          <button className="bg-green-500 flex px-5 py-3 rounded-md">
+            <LogOut />
+            <span>Logout</span>
+          </button>
+        </li>
       </ul>
     </div>
   );
