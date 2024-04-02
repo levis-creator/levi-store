@@ -1,5 +1,5 @@
 "use client";
-import { AvatarMenu, Themes } from "@/lib/types";
+import { AvatarMenu } from "@/lib/types";
 import {
   AlignJustify,
   LayoutDashboard,
@@ -9,11 +9,18 @@ import {
   Sun,
 } from "lucide-react";
 import { useTheme } from "next-themes";
+import React, { useCallback, useState } from "react";
 import AvatarDropDown from "./dropdowns/AvatarDropDown";
 import NotificationDropDown from "./dropdowns/notification/NotificationDropDown";
-import { useState } from "react";
+import { memo } from "react";
 
-const Navbar = () => {
+const Navbar = ({
+  setSideBar,
+  isOpen,
+}: {
+  setSideBar: any;
+  isOpen: boolean;
+}) => {
   const avatarMenu: AvatarMenu[] = [
     {
       title: "Dashboard",
@@ -32,14 +39,20 @@ const Navbar = () => {
     },
   ];
   const { theme, setTheme } = useTheme();
-  const [isDark, setIsDark] = useState<boolean>(true);
   const handleTheme = () => {
     theme == "dark" ? setTheme("light") : setTheme("dark");
   };
+  const handleSideBar = useCallback(() => {
+    setSideBar((isOpen: boolean) => !isOpen);
+  }, [setSideBar]);
   return (
-    <nav className="z-10 w-[calc(100%-16rem)] flex items-center justify-between bg-white text-slate-800 dark:bg-slate-800 dark:text-slate-50 h-20 px-8 py-4 fixed left-64">
+    <nav
+      className={`z-10 ${
+        isOpen ? "lg:w-[calc(100%-16rem)]" : "w-full"
+      } flex items-center justify-between bg-white text-slate-800 dark:bg-slate-800 dark:text-slate-50 h-20 px-8 py-4 fixed `}
+    >
       {/* menuicon */}
-      <button className="text-green-500">
+      <button className="text-green-500 fle" onClick={handleSideBar}>
         <AlignJustify />
       </button>
       {/* three cmicons */}
@@ -54,10 +67,9 @@ const Navbar = () => {
         <NotificationDropDown notifications={avatarMenu} />
 
         <AvatarDropDown avatarMenu={avatarMenu} />
-        {/* <User /> */}
       </div>
     </nav>
   );
 };
 
-export default Navbar;
+export default memo(Navbar);

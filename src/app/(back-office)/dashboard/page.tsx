@@ -3,6 +3,7 @@ import DashBoardCharts from "@/components/back-office/charts/DashBoardCharts";
 import RectangleCards from "@/components/back-office/rectanglecard/RectangleCards";
 import SquareCards from "@/components/back-office/squarecard/SquareCards";
 import CustomTable from "@/components/back-office/table/CustomTable";
+import data from "@/components/back-office/table/mock-data.json";
 
 const page = () => {
   return (
@@ -15,7 +16,7 @@ const page = () => {
       {/* charts */}
       <DashBoardCharts />
       {/* Recent Order table */}
-      <CustomTable />
+      <CustomTable head="Recent Orders" data={data} />
     </div>
   );
 };

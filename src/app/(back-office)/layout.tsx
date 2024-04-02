@@ -1,19 +1,29 @@
+"use client";
 import Navbar from "@/components/back-office/navbar/Navbar";
 import SideBar from "@/components/back-office/sidebar/SideBar";
-import React from "react";
+import useViewport from "@/hooks/useViewPort";
+import React, { useEffect, useState } from "react";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
+  const [openSideBar, setOpenSideBar] = useState<boolean>(false);
+  const [width] = useViewport();
+  useEffect(() => {
+    if (width >= 1024) {
+      setOpenSideBar(true);
+    } else {
+      setOpenSideBar(false);
+    }
+  }, [width]);
+
   return (
     <div className="flex">
       {/* sidebar */}
-      <div className="z-10">
-        <SideBar />
-      </div>
+      {openSideBar && <SideBar show={openSideBar} />}
       {/* Routcontent */}
-      <div className="lg:ml-64 ml-0 flex-grow w-full z-10 ">
+      <div className={`${openSideBar && "lg:ml-64"}  ml-0 flex-grow w-full  `}>
         {/* Header */}
 
-        <Navbar />
+        <Navbar setSideBar={setOpenSideBar} isOpen={openSideBar} />
         {/* main */}
         <main className="min-h-screen mt-16 p-8 bg-slate-50 dark:bg-slate-900 text-slate-50">
           {children}

@@ -6,7 +6,8 @@ var lucide_react_1 = require("lucide-react");
 var image_1 = require("next/image");
 var link_1 = require("next/link");
 var navigation_1 = require("next/navigation");
-var SideDropDown_1 = require("./SideDropDown");
+var SideCollapse_1 = require("./SideCollapse");
+var react_1 = require("react");
 exports.sideBarLinks = [
     {
         id: 1,
@@ -89,16 +90,9 @@ exports.sideBarLinks = [
         icons: React.createElement(lucide_react_1.Target, null)
     },
 ];
-var SideBar = function () {
+var SideBar = function (_a) {
+    var show = _a.show;
     var pathname = navigation_1.usePathname();
-    function pathExtractor(path) {
-        var segments = path.split("/");
-        var categoryIndex = segments.indexOf("dashboard") + 1;
-        if (categoryIndex >= 0 && categoryIndex < segments.length) {
-            return "/" + segments[categoryIndex];
-        }
-        return "";
-    }
     var sideBarItemStyle = function (path) {
         var pathName = path == "/" ? "/dashboard" : "/dashboard" + path;
         if (pathname == pathName) {
@@ -108,17 +102,17 @@ var SideBar = function () {
             return "border-l-transparent";
         }
     };
-    return (React.createElement("div", { className: "  bg-white text-slate-800  dark:bg-slate-700 space-y-6 w-64 h-screen dark:text-slate-50 fixed left-0 top-0 overflow-y-auto" },
+    return (React.createElement("div", { className: " bg-white text-slate-800  dark:bg-slate-700 space-y-6 w-64 h-screen dark:text-slate-50 fixed left-0 top-0 overflow-y-auto" },
         React.createElement("div", { className: "px-6 py-4" },
             React.createElement(link_1["default"], { href: "#", className: "" },
                 React.createElement(image_1["default"], { src: "/logo.png", alt: "alt", width: 0, height: 0, className: "w-36 h-auto ", unoptimized: true }))),
         React.createElement("ul", { className: "space-y-3 " },
             exports.sideBarLinks.map(function (link) { return (React.createElement("li", { key: link.id }, typeof link.path == "string" ? (React.createElement(link_1["default"], { href: "/dashboard" + link.path, className: "flex items-center space-x-3 px-6 py-2 border-l-[6px]  " + sideBarItemStyle(link.path) },
                 link.icons,
-                React.createElement("span", null, link.title))) : (React.createElement(SideDropDown_1["default"], { data: link })))); }),
+                React.createElement("span", null, link.title))) : (React.createElement(SideCollapse_1["default"], { data: link })))); }),
             React.createElement("li", { className: "px-7 py-2" },
                 React.createElement("button", { className: "bg-green-500 flex px-5 py-3 rounded-md" },
                     React.createElement(lucide_react_1.LogOut, null),
                     React.createElement("span", null, "Logout"))))));
 };
-exports["default"] = SideBar;
+exports["default"] = react_1.memo(SideBar);

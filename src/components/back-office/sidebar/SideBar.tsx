@@ -1,8 +1,6 @@
 "use client";
-import { SideBarItem } from "@/lib/types";
+import { NavigationItem } from "@/lib/types";
 import {
-  ChevronDown,
-  ChevronRight,
   Compass,
   LayoutGrid,
   LogOut,
@@ -17,10 +15,10 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ReactElement } from "react";
-import SideDropDown from "./SideDropDown";
+import SideCollapse from "./SideCollapse";
+import { memo } from "react";
 
-export let sideBarLinks: SideBarItem[] = [
+export let sideBarLinks: NavigationItem[] = [
   {
     id: 1,
     title: "Dashboard",
@@ -103,18 +101,9 @@ export let sideBarLinks: SideBarItem[] = [
   },
 ];
 
-const SideBar = () => {
+const SideBar = ({ show }: { show: boolean }) => {
   const pathname = usePathname();
-  function pathExtractor(path: string): string {
-    const segments = path.split("/");
-    const categoryIndex = segments.indexOf("dashboard") + 1;
 
-    if (categoryIndex >= 0 && categoryIndex < segments.length) {
-      return `/${segments[categoryIndex]}`;
-    }
-
-    return "";
-  }
   const sideBarItemStyle = (path: string): string => {
     const pathName = path == "/" ? "/dashboard" : `/dashboard${path}`;
     if (pathname == pathName) {
@@ -124,7 +113,9 @@ const SideBar = () => {
     }
   };
   return (
-    <div className="  bg-white text-slate-800  dark:bg-slate-700 space-y-6 w-64 h-screen dark:text-slate-50 fixed left-0 top-0 overflow-y-auto">
+    <div
+      className={` bg-white text-slate-800  dark:bg-slate-700 space-y-6 w-64 h-screen dark:text-slate-50 fixed left-0 top-0 overflow-y-auto`}
+    >
       {/* logo */}
       <div className="px-6 py-4">
         <Link href="#" className="">
@@ -139,7 +130,7 @@ const SideBar = () => {
         </Link>
       </div>
       <ul className="space-y-3 ">
-        {sideBarLinks.map((link: SideBarItem) => (
+        {sideBarLinks.map((link: NavigationItem) => (
           <li key={link.id}>
             {typeof link.path == "string" ? (
               <Link
@@ -152,7 +143,7 @@ const SideBar = () => {
                 <span>{link.title}</span>
               </Link>
             ) : (
-              <SideDropDown data={link} />
+              <SideCollapse data={link} />
             )}
           </li>
         ))}
@@ -167,4 +158,4 @@ const SideBar = () => {
   );
 };
 
-export default SideBar;
+export default memo(SideBar);

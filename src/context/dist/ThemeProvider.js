@@ -15,8 +15,11 @@ exports.__esModule = true;
 exports.ThemeProvider = void 0;
 var React = require("react");
 var next_themes_1 = require("next-themes");
+var react_hot_toast_1 = require("react-hot-toast");
 function ThemeProvider(_a) {
     var children = _a.children, props = __rest(_a, ["children"]);
-    return (React.createElement(next_themes_1.ThemeProvider, { attribute: "class", defaultTheme: "dark" }, children));
+    return (React.createElement(next_themes_1.ThemeProvider, { attribute: "class", defaultTheme: "dark" },
+        React.createElement(react_hot_toast_1.Toaster, { position: "top-center", reverseOrder: false }),
+        children));
 }
 exports.ThemeProvider = ThemeProvider;

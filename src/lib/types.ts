@@ -5,9 +5,12 @@ export type AvatarMenu = {
   icon: ReactElement;
   handleClick: () => void;
 };
-export type SideBarItem = {
-  id: number;
+export type NavigationItem = {
+  id?: number;
   title: string;
   icons?: ReactElement;
   path: string | any[];
+};
+export type NewCategoryInputs = {
+  title: string;
 };
