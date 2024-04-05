@@ -7,7 +7,8 @@ const Heading: React.FC<{
   title: string;
   additionalBtn?: NavigationItem;
   returnBtn?: boolean;
-}> = ({ title, additionalBtn, returnBtn }) => {
+  handleBack?: () => void;
+}> = ({ title, additionalBtn, returnBtn, handleBack }) => {
   return (
     <div className="w-full flex justify-between py-4 mb-4">
       <h2 className="text-2xl font-semibold text-slate-800 dark:text-slate-50">
@@ -25,7 +26,11 @@ const Heading: React.FC<{
         </Link>
       )}
       {returnBtn && (
-        <button className="text-slate-800 dark:text-slate-50 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-full p-3 ">
+        <button
+          type="button"
+          onClick={handleBack}
+          className="text-slate-800 dark:text-slate-50 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-full p-3 "
+        >
           <X />
         </button>
       )}

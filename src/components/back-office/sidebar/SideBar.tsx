@@ -31,20 +31,16 @@ export let sideBarLinks: NavigationItem[] = [
     icons: <Slack />,
     path: [
       {
-        id: 1,
-        title: "Attributes",
-        path: "/attributes",
-      },
-      {
-        id: 2,
-        title: "banners",
-        path: "/banners",
-      },
-      {
         id: 3,
         title: "Categories",
         path: "/categories",
       },
+      {
+        id: 2,
+        title: "Banners",
+        path: "/banners",
+      },
+
       {
         id: 4,
         title: "Coupons",
@@ -148,7 +144,7 @@ const SideBar = ({ show }: { show: boolean }) => {
           </li>
         ))}
         <li className="px-7 py-2">
-          <button className="bg-green-500 flex px-5 py-3 rounded-md">
+          <button className="bg-green-600 flex px-5 py-3 rounded-md text-slate-50 gap-3">
             <LogOut />
             <span>Logout</span>
           </button>

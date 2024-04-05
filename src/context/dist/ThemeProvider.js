@@ -16,9 +16,13 @@ exports.ThemeProvider = void 0;
 var React = require("react");
 var next_themes_1 = require("next-themes");
 var react_hot_toast_1 = require("react-hot-toast");
+var next_ssr_plugin_1 = require("@uploadthing/react/next-ssr-plugin");
+var server_1 = require("uploadthing/server");
+var core_1 = require("@/app/api/uploadthing/core");
 function ThemeProvider(_a) {
     var children = _a.children, props = __rest(_a, ["children"]);
     return (React.createElement(next_themes_1.ThemeProvider, { attribute: "class", defaultTheme: "dark" },
+        React.createElement(next_ssr_plugin_1.NextSSRPlugin, { routerConfig: server_1.extractRouterConfig(core_1.ourFileRouter) }),
         React.createElement(react_hot_toast_1.Toaster, { position: "top-center", reverseOrder: false }),
         children));
 }

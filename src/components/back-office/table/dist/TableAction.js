@@ -1,3 +1,4 @@
+"use client";
 "use strict";
 exports.__esModule = true;
 var lucide_react_1 = require("lucide-react");

@@ -21,19 +21,14 @@ exports.sideBarLinks = [
         icons: React.createElement(lucide_react_1.Slack, null),
         path: [
             {
-                id: 1,
-                title: "Attributes",
-                path: "/attributes"
-            },
-            {
-                id: 2,
-                title: "banners",
-                path: "/banners"
-            },
-            {
                 id: 3,
                 title: "Categories",
                 path: "/categories"
+            },
+            {
+                id: 2,
+                title: "Banners",
+                path: "/banners"
             },
             {
                 id: 4,
@@ -111,7 +106,7 @@ var SideBar = function (_a) {
                 link.icons,
                 React.createElement("span", null, link.title))) : (React.createElement(SideCollapse_1["default"], { data: link })))); }),
             React.createElement("li", { className: "px-7 py-2" },
-                React.createElement("button", { className: "bg-green-500 flex px-5 py-3 rounded-md" },
+                React.createElement("button", { className: "bg-green-600 flex px-5 py-3 rounded-md text-slate-50 gap-3" },
                     React.createElement(lucide_react_1.LogOut, null),
                     React.createElement("span", null, "Logout"))))));
 };

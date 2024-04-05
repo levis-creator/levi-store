@@ -11,6 +11,21 @@ export type NavigationItem = {
   icons?: ReactElement;
   path: string | any[];
 };
-export type NewCategoryInputs = {
+export type Category = {
   title: string;
+  description: string;
+  slug: string;
+  imageUrl?: string;
+  status?: boolean;
+};
+export type Coupon = {
+  title: string;
+  couponCode: string;
+  expiryDate: string;
+};
+export type Banner = {
+  title: string;
+  description: string;
+  url: string;
+  status?: boolean;
 };

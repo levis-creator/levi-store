@@ -1,3 +1,4 @@
+"use client"
 import { Download, Search, Trash } from "lucide-react";
 import React from "react";
 

@@ -1,5 +1,24 @@
-import { NewCategoryInputs } from "@/lib/types";
+import { Category } from "@/lib/types";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
+
+type InputType =
+  | "text"
+  | "password"
+  | "number"
+  | "email"
+  | "date"
+  | "checkbox"
+  | "radio"
+  | "file"
+  | "submit"
+  | "button"
+  | "color"
+  | "range"
+  | "hidden"
+  | "image"
+  | "tel"
+  | "url"
+  | "datetime-local";
 
 const TextInput: React.FC<{
   label: string;
@@ -7,7 +26,7 @@ const TextInput: React.FC<{
   register: any;
   errors: any;
   isRequired?: boolean;
-  type?: string;
+  type?: InputType;
   className?: string;
   defaultValue?: string;
 }> = ({
@@ -37,7 +56,7 @@ const TextInput: React.FC<{
           id={name}
           defaultValue={defaultValue}
           autoComplete={name}
-          className="block w-full rounded-md border-0 py-3 dark:bg-slate-600 text-slate-800 dark:text-slate-50 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-slate-400  focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
+          className="block w-full rounded-md border-0 py-3 dark:bg-transparent text-slate-800 dark:text-slate-50 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-slate-400  focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
           placeholder={`Type the ${label.toLowerCase()}`}
         />
         {errors[`${name}`] && (
