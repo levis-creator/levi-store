@@ -40,6 +40,7 @@ exports.__esModule = true;
 var Heading_1 = require("@/components/back-office/Heading");
 var Button_1 = require("@/components/back-office/forms/Button");
 var ImageInput_1 = require("@/components/back-office/forms/ImageInput");
+var SelectInput_1 = require("@/components/back-office/forms/SelectInput");
 var TextAreaInput_1 = require("@/components/back-office/forms/TextAreaInput");
 var TextInput_1 = require("@/components/back-office/forms/TextInput");
 var apiRequest_1 = require("@/lib/apiRequest");
@@ -52,6 +53,24 @@ var Page = function () {
     var _a = react_hook_form_1.useForm(), register = _a.register, reset = _a.reset, errors = _a.formState.errors, handleSubmit = _a.handleSubmit;
     var _b = react_1.useState(""), imageUrl = _b[0], setImageUrl = _b[1];
     var _c = react_1.useState(false), loading = _c[0], setLoading = _c[1];
+    var market = [
+        {
+            id: "1",
+            title: "Market 1"
+        },
+        {
+            id: "2",
+            title: "Market 2"
+        },
+        {
+            id: "3",
+            title: "Market 3"
+        },
+        {
+            id: "4",
+            title: "Market 4"
+        },
+    ];
     // this is handling submit
     var onSubmit = function (data) { return __awaiter(void 0, void 0, void 0, function () {
         var slug;
@@ -72,9 +91,10 @@ var Page = function () {
         React.createElement(Heading_1["default"], { title: "New category", returnBtn: true, handleBack: function () { return router.back(); } }),
         React.createElement("form", { onSubmit: handleSubmit(onSubmit), className: "w-full max-w-4xl p-4 bg-white  errors border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3" },
             React.createElement("div", { className: "grid gap-4 sm:grid-cols-2 sm:gap-6" },
-                React.createElement(TextInput_1["default"], { name: "title", label: "Category Title", register: register, errors: errors }),
+                React.createElement(TextInput_1["default"], { name: "title", label: "Category Title", register: register, errors: errors, className: "w-full" }),
+                React.createElement(SelectInput_1["default"], { label: "Select Market", name: "market", register: register, options: market, multiple: true, className: "w-full" }),
                 React.createElement(TextAreaInput_1["default"], { label: "Category Description", name: "description", register: register, errors: errors }),
-                React.createElement(ImageInput_1["default"], { label: "Category Image", setImageUrl: setImageUrl, imageUrl: imageUrl, endpoint: "imageUploader" })),
+                React.createElement(ImageInput_1["default"], { label: "Category Image", setImageUrl: setImageUrl, imageUrl: imageUrl, endpoint: "categoryUploader" })),
             React.createElement(Button_1["default"], { buttonTitle: "Create Category", loadTitle: "Creating...", isLoading: loading, type: "submit" }))));
 };
 exports["default"] = Page;

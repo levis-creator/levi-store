@@ -2,7 +2,7 @@ import { UploadDropzone } from "@/lib/uploadThing";
 import { Pencil } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const ImageInput: React.FC<{
   label: string;

@@ -9,10 +9,9 @@ import {
   Sun,
 } from "lucide-react";
 import { useTheme } from "next-themes";
-import React, { useCallback, useState } from "react";
+import { memo, useCallback } from "react";
 import AvatarDropDown from "./dropdowns/AvatarDropDown";
 import NotificationDropDown from "./dropdowns/notification/NotificationDropDown";
-import { memo } from "react";
 
 const Navbar = ({
   setSideBar,

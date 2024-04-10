@@ -15,6 +15,7 @@ export type Category = {
   title: string;
   description: string;
   slug: string;
+  market?: string;
   imageUrl?: string;
   status?: boolean;
 };
@@ -28,4 +29,21 @@ export type Banner = {
   description: string;
   url: string;
   status?: boolean;
+};
+export type DummyData = {
+  id: string;
+  title: string;
+};
+export type Product = {
+  title: string;
+  description: string;
+  slug: string;
+  images?: string[];
+  category?: string;
+  sku?: string;
+  barcode: string;
+  productPrice: number;
+  salesPrice: number;
+  farmer: string;
+  tags: string[];
 };

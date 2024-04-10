@@ -1,5 +1,3 @@
-import { Layers } from "lucide-react";
-import React from "react";
 import { Stats } from "./SquareCards";
 
 const SquareCard = ({ data }: { data: Stats }) => {

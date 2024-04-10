@@ -1,13 +1,22 @@
 import { Plus } from "lucide-react";
-import React from "react";
+import React, { ButtonHTMLAttributes, ReactElement } from "react";
 type ButtonType = "submit" | "button" | "reset";
-
-const Button: React.FC<{
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   isLoading?: boolean;
   buttonTitle: string;
-  loadTitle: string;
-  type: ButtonType;
-}> = ({ isLoading, buttonTitle = false, loadTitle, type = "button" }) => {
+  loadTitle?: string;
+  type?: ButtonType;
+  icon?: ReactElement;
+};
+
+const Button: React.FC<ButtonProps> = ({
+  isLoading,
+  buttonTitle = false,
+  loadTitle,
+  type = "button",
+  icon,
+  ...props
+}) => {
   return (
     <div className="sm:col-span-1">
       {isLoading ? (
@@ -37,10 +46,11 @@ const Button: React.FC<{
         </button>
       ) : (
         <button
-          type="submit"
+          {...props}
+          type={`${type}`}
           className="inline-flex items-center px-5 py-3 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-green-700 rounded-lg focus:ring-4 focus:ring-green-200 dark:focus:ring-green-900 hover:bg-green-800"
         >
-          <Plus className="w-5 h-5 mr-2" />
+          {icon ? icon : <Plus className="w-5 h-5 mr-2" />}
           <span>{buttonTitle}</span>
         </button>
       )}

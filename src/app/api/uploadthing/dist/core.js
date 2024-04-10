@@ -52,5 +52,49 @@ exports.ourFileRouter = {
                 return [2 /*return*/];
             });
         });
+    }),
+    categoryUploader: f({ image: { maxFileSize: "1MB" } })
+        // Set permissions and file types for this FileRoute
+        .onUploadComplete(function (_a) {
+        var metadata = _a.metadata, file = _a.file;
+        return __awaiter(void 0, void 0, void 0, function () {
+            return __generator(this, function (_b) {
+                console.log("file url", file.url, metadata);
+                return [2 /*return*/];
+            });
+        });
+    }),
+    bannerUploader: f({ image: { maxFileSize: "1MB" } })
+        // Set permissions and file types for this FileRoute
+        .onUploadComplete(function (_a) {
+        var metadata = _a.metadata, file = _a.file;
+        return __awaiter(void 0, void 0, void 0, function () {
+            return __generator(this, function (_b) {
+                console.log("file url", file.url, metadata);
+                return [2 /*return*/];
+            });
+        });
+    }),
+    marketUploader: f({ image: { maxFileSize: "1MB" } })
+        // Set permissions and file types for this FileRoute
+        .onUploadComplete(function (_a) {
+        var metadata = _a.metadata, file = _a.file;
+        return __awaiter(void 0, void 0, void 0, function () {
+            return __generator(this, function (_b) {
+                console.log("file url", file.url, metadata);
+                return [2 /*return*/];
+            });
+        });
+    }),
+    productUploader: f({ image: { maxFileSize: "1MB" } })
+        // Set permissions and file types for this FileRoute
+        .onUploadComplete(function (_a) {
+        var metadata = _a.metadata, file = _a.file;
+        return __awaiter(void 0, void 0, void 0, function () {
+            return __generator(this, function (_b) {
+                console.log("file url", file.url, metadata);
+                return [2 /*return*/];
+            });
+        });
     })
 };

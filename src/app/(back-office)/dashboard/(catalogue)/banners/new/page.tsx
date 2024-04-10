@@ -38,11 +38,7 @@ const Page = () => {
   return (
     <div>
       {/* header */}
-      <Heading
-        title="New Banner"
-        returnBtn={true}
-        handleBack={() => router.back()}
-      />
+      <Heading title="New Banner" returnBtn={true} />
       {/* table */}
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -71,7 +67,7 @@ const Page = () => {
             label="Banner Image"
             setImageUrl={setImageUrl}
             imageUrl={imageUrl}
-            endpoint="imageUploader"
+            endpoint="bannerUploader"
           />
         </div>
         <Button

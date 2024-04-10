@@ -15,8 +15,8 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import SideCollapse from "./SideCollapse";
 import { memo } from "react";
+import SideCollapse from "./SideCollapse";
 
 export let sideBarLinks: NavigationItem[] = [
   {
@@ -31,25 +31,24 @@ export let sideBarLinks: NavigationItem[] = [
     icons: <Slack />,
     path: [
       {
+        id: 5,
+        title: "Products",
+        path: "/products",
+      },
+      {
         id: 3,
         title: "Categories",
         path: "/categories",
       },
-      {
-        id: 2,
-        title: "Banners",
-        path: "/banners",
-      },
-
       {
         id: 4,
         title: "Coupons",
         path: "/coupons",
       },
       {
-        id: 5,
-        title: "Products",
-        path: "/products",
+        id: 2,
+        title: "Banners",
+        path: "/banners",
       },
     ],
   },
@@ -58,12 +57,6 @@ export let sideBarLinks: NavigationItem[] = [
     title: "Customers",
     path: "/customers",
     icons: <Users />,
-  },
-  {
-    id: 6,
-    title: "Orders",
-    path: "/orders",
-    icons: <Compass />,
   },
   {
     id: 11,
@@ -78,22 +71,29 @@ export let sideBarLinks: NavigationItem[] = [
     icons: <SquareUser />,
   },
   {
+    id: 6,
+    title: "Orders",
+    path: "/orders",
+    icons: <Compass />,
+  },
+  {
     id: 7,
     title: "Our Staff",
     path: "/staff",
     icons: <User />,
+  },
+
+  {
+    id: 9,
+    title: "Online Store",
+    path: "/staff",
+    icons: <Target />,
   },
   {
     id: 8,
     title: "Settings",
     path: "/settings",
     icons: <Settings />,
-  },
-  {
-    id: 9,
-    title: "Online Store",
-    path: "/staff",
-    icons: <Target />,
   },
 ];
 

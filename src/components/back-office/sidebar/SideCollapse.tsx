@@ -1,20 +1,12 @@
-import React, { useState } from "react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { NavigationItem } from "@/lib/types";
-import { ChevronDown, ChevronRight } from "lucide-react";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import { NavigationItem } from "@/lib/types";
+import { ChevronDown, ChevronRight } from "lucide-react";
 import Link from "next/link";
+import React, { useState } from "react";
 
 const SideCollapse: React.FC<{ data: NavigationItem }> = ({ data }) => {
   const items: any[] = data.path;

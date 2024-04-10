@@ -6,8 +6,8 @@ var lucide_react_1 = require("lucide-react");
 var image_1 = require("next/image");
 var link_1 = require("next/link");
 var navigation_1 = require("next/navigation");
-var SideCollapse_1 = require("./SideCollapse");
 var react_1 = require("react");
+var SideCollapse_1 = require("./SideCollapse");
 exports.sideBarLinks = [
     {
         id: 1,
@@ -21,14 +21,14 @@ exports.sideBarLinks = [
         icons: React.createElement(lucide_react_1.Slack, null),
         path: [
             {
+                id: 5,
+                title: "Products",
+                path: "/products"
+            },
+            {
                 id: 3,
                 title: "Categories",
                 path: "/categories"
-            },
-            {
-                id: 2,
-                title: "Banners",
-                path: "/banners"
             },
             {
                 id: 4,
@@ -36,9 +36,9 @@ exports.sideBarLinks = [
                 path: "/coupons"
             },
             {
-                id: 5,
-                title: "Products",
-                path: "/products"
+                id: 2,
+                title: "Banners",
+                path: "/banners"
             },
         ]
     },
@@ -47,12 +47,6 @@ exports.sideBarLinks = [
         title: "Customers",
         path: "/customers",
         icons: React.createElement(lucide_react_1.Users, null)
-    },
-    {
-        id: 6,
-        title: "Orders",
-        path: "/orders",
-        icons: React.createElement(lucide_react_1.Compass, null)
     },
     {
         id: 11,
@@ -67,22 +61,28 @@ exports.sideBarLinks = [
         icons: React.createElement(lucide_react_1.SquareUser, null)
     },
     {
+        id: 6,
+        title: "Orders",
+        path: "/orders",
+        icons: React.createElement(lucide_react_1.Compass, null)
+    },
+    {
         id: 7,
         title: "Our Staff",
         path: "/staff",
         icons: React.createElement(lucide_react_1.User, null)
     },
     {
-        id: 8,
-        title: "Settings",
-        path: "/settings",
-        icons: React.createElement(lucide_react_1.Settings, null)
-    },
-    {
         id: 9,
         title: "Online Store",
         path: "/staff",
         icons: React.createElement(lucide_react_1.Target, null)
+    },
+    {
+        id: 8,
+        title: "Settings",
+        path: "/settings",
+        icons: React.createElement(lucide_react_1.Settings, null)
     },
 ];
 var SideBar = function (_a) {

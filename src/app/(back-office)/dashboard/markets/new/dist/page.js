@@ -66,13 +66,13 @@ var Page = function () {
         });
     }); };
     return (react_1["default"].createElement("div", null,
-        react_1["default"].createElement(Heading_1["default"], { title: "New Banner", returnBtn: true, handleBack: function () { return router.back(); } }),
+        react_1["default"].createElement(Heading_1["default"], { title: "New Banner", returnBtn: true }),
         react_1["default"].createElement("form", { onSubmit: handleSubmit(onSubmit), className: "w-full max-w-4xl p-4 bg-white  errors border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3" },
             react_1["default"].createElement("div", { className: "grid gap-4 sm:grid-cols-2 sm:gap-6" },
                 react_1["default"].createElement(TextInput_1["default"], { name: "title", label: "Banner Title", register: register, errors: errors }),
                 react_1["default"].createElement(TextInput_1["default"], { name: "url", label: "Banner url", register: register, errors: errors }),
                 react_1["default"].createElement(TextAreaInput_1["default"], { label: "Banner Description", name: "description", register: register, errors: errors }),
-                react_1["default"].createElement(ImageInput_1["default"], { label: "Banner Image", setImageUrl: setImageUrl, imageUrl: imageUrl, endpoint: "imageUploader" })),
+                react_1["default"].createElement(ImageInput_1["default"], { label: "Banner Image", setImageUrl: setImageUrl, imageUrl: imageUrl, endpoint: "marketUploader" })),
             react_1["default"].createElement(Button_1["default"], { buttonTitle: "Create Banner", loadTitle: "Creating...", isLoading: loading, type: "submit" }))));
 };
 exports["default"] = Page;

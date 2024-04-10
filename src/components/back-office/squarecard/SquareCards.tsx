@@ -1,6 +1,6 @@
-import React, { ReactElement } from "react";
+import { Layers } from "lucide-react";
+import { ReactElement } from "react";
 import SquareCard from "./SquareCard";
-import { Layers, LucideIcon } from "lucide-react";
 
 export type Stats = {
   title: string;

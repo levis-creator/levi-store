@@ -1,6 +1,8 @@
+"use client";
 import { NavigationItem } from "@/lib/types";
 import { X } from "lucide-react";
 import Link from "next/link";
+
 import React from "react";
 
 const Heading: React.FC<{
@@ -9,6 +11,7 @@ const Heading: React.FC<{
   returnBtn?: boolean;
   handleBack?: () => void;
 }> = ({ title, additionalBtn, returnBtn, handleBack }) => {
+  
   return (
     <div className="w-full flex justify-between py-4 mb-4">
       <h2 className="text-2xl font-semibold text-slate-800 dark:text-slate-50">

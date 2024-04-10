@@ -6,13 +6,13 @@ import { Plus } from "lucide-react";
 const page = () => {
   const additionalBtn: NavigationItem = {
     icons: <Plus />,
-    title: "Add Banner",
-    path: "/dashboard/banners/new",
+    title: "Add Product",
+    path: "/dashboard/products/new",
   };
   return (
     <div>
       {/* header */}
-      <Heading title="Banners" additionalBtn={additionalBtn} />
+      <Heading title="Products" additionalBtn={additionalBtn} />
       {/* table Actions*/}
       <TableAction />
     </div>

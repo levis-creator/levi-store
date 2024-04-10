@@ -2,11 +2,12 @@
 import Heading from "@/components/back-office/Heading";
 import Button from "@/components/back-office/forms/Button";
 import ImageInput from "@/components/back-office/forms/ImageInput";
+import SelectInput from "@/components/back-office/forms/SelectInput";
 import TextAreaInput from "@/components/back-office/forms/TextAreaInput";
 import TextInput from "@/components/back-office/forms/TextInput";
 import { makePostRequest } from "@/lib/apiRequest";
 import { generateSlug } from "@/lib/slugGenerator";
-import { Category } from "@/lib/types";
+import { Category, DummyData } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -21,12 +22,29 @@ const Page = () => {
   } = useForm<Category>();
   const [imageUrl, setImageUrl] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const market: DummyData[] = [
+    {
+      id: "1",
+      title: "Market 1",
+    },
+    {
+      id: "2",
+      title: "Market 2",
+    },
+    {
+      id: "3",
+      title: "Market 3",
+    },
+    {
+      id: "4",
+      title: "Market 4",
+    },
+  ];
   // this is handling submit
   const onSubmit: SubmitHandler<Category> = async (data) => {
     const slug = generateSlug(data.title);
     data.slug = slug;
     data.imageUrl = imageUrl;
-
     await makePostRequest(
       setLoading,
       "api/categories",
@@ -39,11 +57,7 @@ const Page = () => {
   return (
     <div>
       {/* header */}
-      <Heading
-        title="New category"
-        returnBtn={true}
-        handleBack={() => router.back()}
-      />
+      <Heading title="New category" returnBtn={true} handleBack={() => router.back()} />
       {/* table */}
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -55,6 +69,15 @@ const Page = () => {
             label="Category Title"
             register={register}
             errors={errors}
+            className="w-full"
+          />
+          <SelectInput
+            label="Select Market"
+            name="market"
+            register={register}
+            options={market}
+            multiple={true}
+            className="w-full"
           />
           <TextAreaInput
             label="Category Description"
@@ -66,7 +89,7 @@ const Page = () => {
             label="Category Image"
             setImageUrl={setImageUrl}
             imageUrl={imageUrl}
-            endpoint="imageUploader"
+            endpoint="categoryUploader"
           />
         </div>
         <Button

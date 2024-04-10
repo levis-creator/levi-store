@@ -1,5 +1,3 @@
-import { ShoppingCart } from "lucide-react";
-import React from "react";
 import { Stats } from "../squarecard/SquareCards";
 
 const RectangleCard = ({ data }: { data: Stats }) => {

@@ -38,41 +38,86 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var Heading_1 = require("@/components/back-office/Heading");
-var TextInput_1 = require("@/components/back-office/forms/TextInput");
-var react_hook_form_1 = require("react-hook-form");
-var react_1 = require("react");
 var Button_1 = require("@/components/back-office/forms/Button");
-var TextAreaInput_1 = require("@/components/back-office/forms/TextAreaInput");
-var navigation_1 = require("next/navigation");
 var ImageInput_1 = require("@/components/back-office/forms/ImageInput");
+var SelectInput_1 = require("@/components/back-office/forms/SelectInput");
+var TextAreaInput_1 = require("@/components/back-office/forms/TextAreaInput");
+var TextInput_1 = require("@/components/back-office/forms/TextInput");
+var TagsDisplay_1 = require("@/components/back-office/forms/tags/TagsDisplay");
+var TagsInput_1 = require("@/components/back-office/forms/tags/TagsInput");
 var apiRequest_1 = require("@/lib/apiRequest");
+var react_1 = require("react");
+var react_hook_form_1 = require("react-hook-form");
 var Page = function () {
-    var router = navigation_1.useRouter();
     var _a = react_hook_form_1.useForm(), register = _a.register, reset = _a.reset, errors = _a.formState.errors, handleSubmit = _a.handleSubmit;
     var _b = react_1.useState(""), imageUrl = _b[0], setImageUrl = _b[1];
     var _c = react_1.useState(false), loading = _c[0], setLoading = _c[1];
+    var _d = react_1.useState(["tag1", "tag2"]), tags = _d[0], setTags = _d[1];
     // this is handling submit
     var onSubmit = function (data) { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    // data.slug = slug;
-                    data.url = imageUrl;
-                    return [4 /*yield*/, apiRequest_1.makePostRequest(setLoading, "api/banners", data, "Banners", reset).then(function () { return setImageUrl(""); })];
+                    data.images = [imageUrl];
+                    data.tags = tags;
+                    return [4 /*yield*/, apiRequest_1.makePostRequest(setLoading, "api/products", data, "Product", reset).then(function () { return setImageUrl(""); })];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];
             }
         });
     }); };
-    return (react_1["default"].createElement("div", null,
-        react_1["default"].createElement(Heading_1["default"], { title: "New Banner", returnBtn: true, handleBack: function () { return router.back(); } }),
-        react_1["default"].createElement("form", { onSubmit: handleSubmit(onSubmit), className: "w-full max-w-4xl p-4 bg-white  errors border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3" },
-            react_1["default"].createElement("div", { className: "grid gap-4 sm:grid-cols-2 sm:gap-6" },
-                react_1["default"].createElement(TextInput_1["default"], { name: "title", label: "Banner Title", register: register, errors: errors }),
-                react_1["default"].createElement(TextInput_1["default"], { name: "url", label: "Banner url", register: register, errors: errors }),
-                react_1["default"].createElement(TextAreaInput_1["default"], { label: "Banner Description", name: "description", register: register, errors: errors }),
-                react_1["default"].createElement(ImageInput_1["default"], { label: "Banner Image", setImageUrl: setImageUrl, imageUrl: imageUrl, endpoint: "imageUploader" })),
-            react_1["default"].createElement(Button_1["default"], { buttonTitle: "Create Banner", loadTitle: "Creating...", isLoading: loading, type: "submit" }))));
+    var categories = [
+        {
+            id: "1",
+            title: "Category 1"
+        },
+        {
+            id: "2",
+            title: "Category 2"
+        },
+        {
+            id: "3",
+            title: "Category 3"
+        },
+        {
+            id: "4",
+            title: "Category 4"
+        },
+    ];
+    var farmers = [
+        {
+            id: "1",
+            title: "Farmers 1"
+        },
+        {
+            id: "2",
+            title: "Farmers 2"
+        },
+        {
+            id: "3",
+            title: "Farmers 3"
+        },
+        {
+            id: "4",
+            title: "Farmers 4"
+        },
+    ];
+    return (React.createElement("div", null,
+        React.createElement(Heading_1["default"], { title: "New Products", returnBtn: true }),
+        React.createElement("form", { onSubmit: handleSubmit(onSubmit), className: "w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3" },
+            React.createElement("div", { className: "grid gap-4 sm:grid-cols-2 sm:gap-6" },
+                React.createElement(TextInput_1["default"], { name: "title", label: "Product Title", register: register, errors: errors }),
+                React.createElement(TextInput_1["default"], { name: "sku", label: "Product SKU", register: register, errors: errors, className: "w-full" }),
+                React.createElement(TextInput_1["default"], { name: "barcode", label: "Product Barcode", register: register, errors: errors, className: "w-full" }),
+                React.createElement(TextInput_1["default"], { name: "productPrice", label: "Product Price", register: register, errors: errors, className: "w-full", type: "number" }),
+                React.createElement(TextInput_1["default"], { name: "salesPrice", label: "Product Sales Price (discounted)", register: register, errors: errors, className: "w-full", type: "number" }),
+                React.createElement(SelectInput_1["default"], { label: "Select Category", name: "category", register: register, options: categories, className: "w-full" }),
+                React.createElement(SelectInput_1["default"], { label: "Select Farmers", name: "farmer", register: register, options: farmers, className: "w-full" }),
+                React.createElement(TagsInput_1["default"], { label: "Tags", name: "tags", setTags: setTags }),
+                (tags === null || tags === void 0 ? void 0 : tags.length) !== 0 && React.createElement(TagsDisplay_1["default"], { tags: tags, setTags: setTags }),
+                React.createElement(ImageInput_1["default"], { label: "Product image", setImageUrl: setImageUrl, imageUrl: imageUrl, endpoint: "productUploader" }),
+                React.createElement(TextAreaInput_1["default"], { label: "Product Description", name: "description", register: register, errors: errors })),
+            React.createElement(Button_1["default"], { buttonTitle: "Create Product", loadTitle: "Creating...", isLoading: loading, type: "submit" }))));
 };
 exports["default"] = Page;

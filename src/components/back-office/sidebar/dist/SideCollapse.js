@@ -1,9 +1,9 @@
 "use strict";
 exports.__esModule = true;
-var react_1 = require("react");
-var lucide_react_1 = require("lucide-react");
 var collapsible_1 = require("@/components/ui/collapsible");
+var lucide_react_1 = require("lucide-react");
 var link_1 = require("next/link");
+var react_1 = require("react");
 var SideCollapse = function (_a) {
     var data = _a.data;
     var items = data.path;

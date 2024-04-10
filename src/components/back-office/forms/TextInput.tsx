@@ -1,6 +1,3 @@
-import { Category } from "@/lib/types";
-import { FieldErrors, UseFormRegister } from "react-hook-form";
-
 type InputType =
   | "text"
   | "password"

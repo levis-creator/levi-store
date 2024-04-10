@@ -1,7 +1,6 @@
-import React from "react";
-import RectangleCard from "./RectangleCard";
-import { Stats } from "../squarecard/SquareCards";
 import { CheckCheck, Loader2, RefreshCcw, ShoppingCart } from "lucide-react";
+import { Stats } from "../squarecard/SquareCards";
+import RectangleCard from "./RectangleCard";
 
 const RectangleCards = () => {
   const ordersStats: Stats[] = [

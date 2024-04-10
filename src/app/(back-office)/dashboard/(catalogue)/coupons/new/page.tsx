@@ -30,11 +30,7 @@ const Page = () => {
   return (
     <div>
       {/* header */}
-      <Heading
-        title="New Coupon"
-        returnBtn={true}
-        handleBack={() => router.back()}
-      />
+      <Heading title="New Coupon" returnBtn={true} />
       {/* table */}
       <form
         onSubmit={handleSubmit(onSubmit)}
