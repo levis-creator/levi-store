@@ -18,17 +18,20 @@ export type Category = {
   market?: string;
   imageUrl?: string;
   status?: boolean;
+  isPublished: boolean;
 };
 export type Coupon = {
   title: string;
   couponCode: string;
   expiryDate: string;
+  isPublished: boolean;
 };
 export type Banner = {
   title: string;
   description: string;
   url: string;
   status?: boolean;
+  isPublished: boolean;
 };
 export type DummyData = {
   id: string;
@@ -46,4 +49,23 @@ export type Product = {
   salesPrice: number;
   farmer: string;
   tags: string[];
+  isPublished: boolean;
+};
+export type Farmer = {
+  name: string;
+  phone: string;
+  email: string;
+  physicalAddress: string;
+  contactPerson: string;
+  contactPersonPhone: string;
+  terms: string;
+  notes?: string;
+  isActive: boolean;
+};
+
+export type Market = {
+  title: string;
+  description: string;
+  logo: string;
+  isActive: boolean;
 };

@@ -9,10 +9,11 @@ const page = () => {
     title: "Add Product",
     path: "/dashboard/products/new",
   };
+  
   return (
     <div>
       {/* header */}
-      <Heading title="Products" additionalBtn={additionalBtn} />
+    <Heading title="Products" additionalBtn={additionalBtn} />
       {/* table Actions*/}
       <TableAction />
     </div>

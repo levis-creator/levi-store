@@ -2,6 +2,7 @@
 import Heading from "@/components/back-office/Heading";
 import Button from "@/components/back-office/forms/Button";
 import TextInput from "@/components/back-office/forms/TextInput";
+import ToggleInput from "@/components/back-office/forms/ToggleInput";
 import { makePostRequest } from "@/lib/apiRequest";
 import { generateCouponCode } from "@/lib/couponGenerator";
 import { Coupon } from "@/lib/types";
@@ -15,11 +16,18 @@ const Page = () => {
   const {
     register,
     reset,
+    watch,
     formState: { errors },
     handleSubmit,
-  } = useForm<Coupon>();
+  } = useForm<Coupon>({
+    defaultValues: {
+      isPublished: true,
+    },
+  });
 
   const [loading, setLoading] = useState<boolean>(false);
+  const isActive = watch("isPublished");
+
   // this is handling submit
   const onSubmit: SubmitHandler<Coupon> = async (data) => {
     const couponCode = generateCouponCode(8);
@@ -30,7 +38,11 @@ const Page = () => {
   return (
     <div>
       {/* header */}
-      <Heading title="New Coupon" returnBtn={true} />
+      <Heading
+        title="New Coupon"
+        returnBtn={true}
+        handleBack={() => router.back()}
+      />
       {/* table */}
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -58,6 +70,15 @@ const Page = () => {
             errors={errors}
             type="date"
             className="w-full"
+          />
+          <ToggleInput
+            trueTitle="Publish"
+            falseTitle="Draft"
+            label="Publish  Product"
+            name="isPublished"
+            register={register}
+            isActive={isActive}
+            checked={true}
           />
         </div>
         <Button

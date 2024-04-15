@@ -43,6 +43,7 @@ var ImageInput_1 = require("@/components/back-office/forms/ImageInput");
 var SelectInput_1 = require("@/components/back-office/forms/SelectInput");
 var TextAreaInput_1 = require("@/components/back-office/forms/TextAreaInput");
 var TextInput_1 = require("@/components/back-office/forms/TextInput");
+var ToggleInput_1 = require("@/components/back-office/forms/ToggleInput");
 var apiRequest_1 = require("@/lib/apiRequest");
 var slugGenerator_1 = require("@/lib/slugGenerator");
 var navigation_1 = require("next/navigation");
@@ -50,9 +51,14 @@ var react_1 = require("react");
 var react_hook_form_1 = require("react-hook-form");
 var Page = function () {
     var router = navigation_1.useRouter();
-    var _a = react_hook_form_1.useForm(), register = _a.register, reset = _a.reset, errors = _a.formState.errors, handleSubmit = _a.handleSubmit;
+    var _a = react_hook_form_1.useForm({
+        defaultValues: {
+            isPublished: true
+        }
+    }), register = _a.register, reset = _a.reset, watch = _a.watch, errors = _a.formState.errors, handleSubmit = _a.handleSubmit;
     var _b = react_1.useState(""), imageUrl = _b[0], setImageUrl = _b[1];
     var _c = react_1.useState(false), loading = _c[0], setLoading = _c[1];
+    var isActive = watch("isPublished");
     var market = [
         {
             id: "1",
@@ -94,7 +100,8 @@ var Page = function () {
                 React.createElement(TextInput_1["default"], { name: "title", label: "Category Title", register: register, errors: errors, className: "w-full" }),
                 React.createElement(SelectInput_1["default"], { label: "Select Market", name: "market", register: register, options: market, multiple: true, className: "w-full" }),
                 React.createElement(TextAreaInput_1["default"], { label: "Category Description", name: "description", register: register, errors: errors }),
-                React.createElement(ImageInput_1["default"], { label: "Category Image", setImageUrl: setImageUrl, imageUrl: imageUrl, endpoint: "categoryUploader" })),
+                React.createElement(ImageInput_1["default"], { label: "Category Image", setImageUrl: setImageUrl, imageUrl: imageUrl, endpoint: "categoryUploader" }),
+                React.createElement(ToggleInput_1["default"], { trueTitle: "Publish", falseTitle: "Draft", label: "Publish category", name: "isPublished", register: register, isActive: isActive, checked: true })),
             React.createElement(Button_1["default"], { buttonTitle: "Create Category", loadTitle: "Creating...", isLoading: loading, type: "submit" }))));
 };
 exports["default"] = Page;

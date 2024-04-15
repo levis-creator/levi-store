@@ -5,10 +5,12 @@ import ImageInput from "@/components/back-office/forms/ImageInput";
 import SelectInput from "@/components/back-office/forms/SelectInput";
 import TextAreaInput from "@/components/back-office/forms/TextAreaInput";
 import TextInput from "@/components/back-office/forms/TextInput";
+import ToggleInput from "@/components/back-office/forms/ToggleInput";
 import TagsDisplay from "@/components/back-office/forms/tags/TagsDisplay";
 import TagsInput from "@/components/back-office/forms/tags/TagsInput";
 import { makePostRequest } from "@/lib/apiRequest";
 import { DummyData, Product } from "@/lib/types";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -16,13 +18,19 @@ const Page = () => {
   const {
     register,
     reset,
+    watch,
     formState: { errors },
     handleSubmit,
-  } = useForm<Product>();
+  } = useForm<Product>({
+    defaultValues: {
+      isPublished: true,
+    },
+  });
   const [imageUrl, setImageUrl] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [tags, setTags] = useState<string[]>(["tag1", "tag2"]);
-
+  const [tags, setTags] = useState<string[]>([]);
+  const router = useRouter();
+  const isActive = watch("isPublished");
   // this is handling submit
   const onSubmit: SubmitHandler<Product> = async (data) => {
     data.images = [imageUrl];
@@ -75,7 +83,7 @@ const Page = () => {
   return (
     <div>
       {/* header */}
-      <Heading title="New Products" returnBtn={true} />
+      <Heading title="New Products" returnBtn={true} handleBack={router.back} />
       {/* table */}
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -148,8 +156,16 @@ const Page = () => {
             register={register}
             errors={errors}
           />
+          <ToggleInput
+            trueTitle="Publish"
+            falseTitle="Draft"
+            label="Publish  Product"
+            name="isPublished"
+            register={register}
+            isActive={isActive}
+            checked={true}
+          />
         </div>
-
         <Button
           buttonTitle="Create Product"
           loadTitle="Creating..."

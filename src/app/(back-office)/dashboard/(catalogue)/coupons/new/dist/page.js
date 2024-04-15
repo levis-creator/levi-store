@@ -40,6 +40,7 @@ exports.__esModule = true;
 var Heading_1 = require("@/components/back-office/Heading");
 var Button_1 = require("@/components/back-office/forms/Button");
 var TextInput_1 = require("@/components/back-office/forms/TextInput");
+var ToggleInput_1 = require("@/components/back-office/forms/ToggleInput");
 var apiRequest_1 = require("@/lib/apiRequest");
 var couponGenerator_1 = require("@/lib/couponGenerator");
 var navigation_1 = require("next/navigation");
@@ -48,8 +49,13 @@ var react_hook_form_1 = require("react-hook-form");
 var Page = function () {
     var router = navigation_1.useRouter();
     var couponCode = react_1.useRef(couponGenerator_1.generateCouponCode(8));
-    var _a = react_hook_form_1.useForm(), register = _a.register, reset = _a.reset, errors = _a.formState.errors, handleSubmit = _a.handleSubmit;
+    var _a = react_hook_form_1.useForm({
+        defaultValues: {
+            isPublished: true
+        }
+    }), register = _a.register, reset = _a.reset, watch = _a.watch, errors = _a.formState.errors, handleSubmit = _a.handleSubmit;
     var _b = react_1.useState(false), loading = _b[0], setLoading = _b[1];
+    var isActive = watch("isPublished");
     // this is handling submit
     var onSubmit = function (data) { return __awaiter(void 0, void 0, void 0, function () {
         var couponCode;
@@ -66,12 +72,13 @@ var Page = function () {
         });
     }); };
     return (React.createElement("div", null,
-        React.createElement(Heading_1["default"], { title: "New Coupon", returnBtn: true }),
+        React.createElement(Heading_1["default"], { title: "New Coupon", returnBtn: true, handleBack: function () { return router.back(); } }),
         React.createElement("form", { onSubmit: handleSubmit(onSubmit), className: "w-full max-w-4xl p-4 bg-white  errors border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3" },
             React.createElement("div", { className: "grid gap-4 sm:grid-cols-2 sm:gap-6" },
                 React.createElement(TextInput_1["default"], { name: "title", label: "Coupon Title", register: register, errors: errors }),
                 React.createElement(TextInput_1["default"], { name: "couponCode", label: "Coupon Code", register: register, errors: errors, defaultValue: couponCode.current, className: "w-full" }),
-                React.createElement(TextInput_1["default"], { name: "expiryDate", label: "Category Expiry Date", register: register, errors: errors, type: "date", className: "w-full" })),
+                React.createElement(TextInput_1["default"], { name: "expiryDate", label: "Category Expiry Date", register: register, errors: errors, type: "date", className: "w-full" }),
+                React.createElement(ToggleInput_1["default"], { trueTitle: "Publish", falseTitle: "Draft", label: "Publish  Product", name: "isPublished", register: register, isActive: isActive, checked: true })),
             React.createElement(Button_1["default"], { buttonTitle: "Create Coupon", loadTitle: "Creating...", isLoading: loading, type: "submit" }))));
 };
 exports["default"] = Page;

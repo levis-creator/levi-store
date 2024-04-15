@@ -5,6 +5,7 @@ import ImageInput from "@/components/back-office/forms/ImageInput";
 import SelectInput from "@/components/back-office/forms/SelectInput";
 import TextAreaInput from "@/components/back-office/forms/TextAreaInput";
 import TextInput from "@/components/back-office/forms/TextInput";
+import ToggleInput from "@/components/back-office/forms/ToggleInput";
 import { makePostRequest } from "@/lib/apiRequest";
 import { generateSlug } from "@/lib/slugGenerator";
 import { Category, DummyData } from "@/lib/types";
@@ -17,11 +18,18 @@ const Page = () => {
   const {
     register,
     reset,
+    watch,
     formState: { errors },
     handleSubmit,
-  } = useForm<Category>();
+  } = useForm<Category>({
+    defaultValues: {
+      isPublished: true,
+    },
+  });
   const [imageUrl, setImageUrl] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const isActive = watch("isPublished");
+
   const market: DummyData[] = [
     {
       id: "1",
@@ -57,7 +65,11 @@ const Page = () => {
   return (
     <div>
       {/* header */}
-      <Heading title="New category" returnBtn={true} handleBack={() => router.back()} />
+      <Heading
+        title="New category"
+        returnBtn={true}
+        handleBack={() => router.back()}
+      />
       {/* table */}
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -90,6 +102,15 @@ const Page = () => {
             setImageUrl={setImageUrl}
             imageUrl={imageUrl}
             endpoint="categoryUploader"
+          />
+          <ToggleInput
+            trueTitle="Publish"
+            falseTitle="Draft"
+            label="Publish category"
+            name="isPublished"
+            register={register}
+            isActive={isActive}
+            checked={true}
           />
         </div>
         <Button

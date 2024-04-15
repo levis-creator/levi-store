@@ -1,29 +1,35 @@
 "use client";
 import Heading from "@/components/back-office/Heading";
-import TextInput from "@/components/back-office/forms/TextInput";
-import { SubmitHandler, useForm } from "react-hook-form";
-import React, { useState } from "react";
-import { Banner, Category } from "@/lib/types";
 import Button from "@/components/back-office/forms/Button";
-import TextAreaInput from "@/components/back-office/forms/TextAreaInput";
-import { generateSlug } from "@/lib/slugGenerator";
-import { useRouter } from "next/navigation";
 import ImageInput from "@/components/back-office/forms/ImageInput";
+import TextAreaInput from "@/components/back-office/forms/TextAreaInput";
+import TextInput from "@/components/back-office/forms/TextInput";
+import ToggleInput from "@/components/back-office/forms/ToggleInput";
 import { makePostRequest } from "@/lib/apiRequest";
+import { Banner } from "@/lib/types";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 const Page = () => {
   const router = useRouter();
   const {
     register,
     reset,
+    watch,
     formState: { errors },
     handleSubmit,
-  } = useForm<Banner>();
+  } = useForm<Banner>({
+    defaultValues: {
+      isPublished: true,
+    },
+  });
   const [imageUrl, setImageUrl] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const isActive = watch("isPublished");
+
   // this is handling submit
   const onSubmit: SubmitHandler<Banner> = async (data) => {
-    // data.slug = slug;
     data.url = imageUrl;
 
     await makePostRequest(
@@ -38,7 +44,11 @@ const Page = () => {
   return (
     <div>
       {/* header */}
-      <Heading title="New Banner" returnBtn={true} />
+      <Heading
+        title="New Banner"
+        returnBtn={true}
+        handleBack={() => router.back()}
+      />
       {/* table */}
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -68,6 +78,15 @@ const Page = () => {
             setImageUrl={setImageUrl}
             imageUrl={imageUrl}
             endpoint="bannerUploader"
+          />
+          <ToggleInput
+            trueTitle="Publish"
+            falseTitle="Draft"
+            label="Publish banner"
+            name="isPublished"
+            register={register}
+            isActive={isActive}
+            checked={true}
           />
         </div>
         <Button

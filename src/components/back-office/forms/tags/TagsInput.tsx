@@ -20,6 +20,7 @@ const TagsInput: FC<TagsInputProps> = ({
   const [tag, setTag] = useState<string>("");
   const handleAddTag = (e: any) => {
     e.preventDefault();
+    if (!tag) return;
     setTags((tags) => [...tags, tag]);
     setAddTag(false);
     setTag("");

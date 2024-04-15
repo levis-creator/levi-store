@@ -18,6 +18,8 @@ var TagsInput = function (_a) {
     var _d = react_1.useState(""), tag = _d[0], setTag = _d[1];
     var handleAddTag = function (e) {
         e.preventDefault();
+        if (!tag)
+            return;
         setTags(function (tags) { return __spreadArrays(tags, [tag]); });
         setAddTag(false);
         setTag("");

@@ -1,44 +1,40 @@
 "use client";
 import Heading from "@/components/back-office/Heading";
-import TextInput from "@/components/back-office/forms/TextInput";
-import { SubmitHandler, useForm } from "react-hook-form";
-import React, { useState } from "react";
-import { Banner, Category } from "@/lib/types";
 import Button from "@/components/back-office/forms/Button";
 import TextAreaInput from "@/components/back-office/forms/TextAreaInput";
-import { generateSlug } from "@/lib/slugGenerator";
-import { useRouter } from "next/navigation";
-import ImageInput from "@/components/back-office/forms/ImageInput";
+import TextInput from "@/components/back-office/forms/TextInput";
+import ToggleInput from "@/components/back-office/forms/ToggleInput";
 import { makePostRequest } from "@/lib/apiRequest";
+import { Farmer } from "@/lib/types";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 const Page = () => {
   const router = useRouter();
   const {
     register,
     reset,
+    watch,
     formState: { errors },
     handleSubmit,
-  } = useForm<Banner>();
-  const [imageUrl, setImageUrl] = useState<string>("");
+  } = useForm<Farmer>({
+    defaultValues: {
+      isActive: true,
+    },
+  });
   const [loading, setLoading] = useState<boolean>(false);
-  // this is handling submit
-  const onSubmit: SubmitHandler<Banner> = async (data) => {
-    // data.slug = slug;
-    data.url = imageUrl;
+  const isActive = watch("isActive");
 
-    await makePostRequest(
-      setLoading,
-      "api/banners",
-      data,
-      "Banners",
-      reset
-    ).then(() => setImageUrl(""));
+  // this is handling submit
+  const onSubmit: SubmitHandler<Farmer> = async (data) => {
+    await makePostRequest(setLoading, "api/Farmers", data, "Farmers", reset);
   };
 
   return (
     <div>
       {/* header */}
-      <Heading title="New Banner" returnBtn={true} />
+      <Heading title="New Farmer" returnBtn={true} handleBack={router.back} />
       {/* table */}
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -46,32 +42,75 @@ const Page = () => {
       >
         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
           <TextInput
-            name="title"
-            label="Banner Title"
+            name="name"
+            label="Farmer's Full Name"
             register={register}
             errors={errors}
+            className="w-full"
           />
           <TextInput
-            name="url"
-            label="Banner url"
+            name="phone"
+            label="Farmer's Phone"
+            type="tel"
+            register={register}
+            errors={errors}
+            className="w-full"
+          />
+          <TextInput
+            label="Farmer's Email Address"
+            name="email"
+            type="email"
+            register={register}
+            errors={errors}
+            className="w-full"
+          />
+          <TextInput
+            label="Farmer's Physical Address"
+            name="physicalAddress"
+            register={register}
+            errors={errors}
+            className="w-full"
+          />
+          <TextInput
+            label="Farmer's Contact Person"
+            name="contactPerson"
+            register={register}
+            errors={errors}
+            className="w-full"
+          />{" "}
+          <TextInput
+            label="Farmer's Contact Person Phone Number"
+            name="contactPersonPhone"
+            register={register}
+            errors={errors}
+            className="w-full"
+            type="tel"
+          />
+          <TextAreaInput
+            label="Farmer's Payment terms"
+            name="terms"
             register={register}
             errors={errors}
           />
           <TextAreaInput
-            label="Banner Description"
-            name="description"
+            label="Notes"
+            name="notes"
             register={register}
             errors={errors}
+            isRequired={false}
           />
-          <ImageInput
-            label="Banner Image"
-            setImageUrl={setImageUrl}
-            imageUrl={imageUrl}
-            endpoint="imageUploader"
+          <ToggleInput
+            trueTitle="Active"
+            falseTitle="Inactive"
+            label="Farmer status"
+            name="status"
+            register={register}
+            isActive={isActive}
+            checked={true}
           />
         </div>
         <Button
-          buttonTitle="Create Banner"
+          buttonTitle="Create Farmer"
           loadTitle="Creating..."
           isLoading={loading}
           type="submit"

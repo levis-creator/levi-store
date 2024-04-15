@@ -1,7 +1,7 @@
 import Heading from "@/components/back-office/Heading";
 import TableAction from "@/components/back-office/table/TableAction";
 import { NavigationItem } from "@/lib/types";
-import { Download, Plus, Search, Trash } from "lucide-react";
+import { Plus } from "lucide-react";
 
 const page = () => {
   const additionalBtn: NavigationItem = {
