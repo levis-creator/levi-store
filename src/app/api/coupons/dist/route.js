@@ -39,26 +39,27 @@ exports.__esModule = true;
 exports.POST = void 0;
 var server_1 = require("next/server");
 exports.POST = function (request) { return __awaiter(void 0, void 0, void 0, function () {
-    var body, error_1;
+    var body, data;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, request.json()];
+            case 0: return [4 /*yield*/, request.json()];
             case 1:
                 body = _a.sent();
-                return [2 /*return*/, server_1.NextResponse.json({
-                        message: "success",
-                        body: body
+                return [4 /*yield*/, fetch(process.env.NEXT_PUBLIC_API_BASE_URL + "/coupons", {
+                        method: "POST",
+                        body: JSON.stringify(body),
+                        headers: { "Content-Type": "application/json" }
+                    })
+                        .then(function (data) {
+                        return new Response("success", { status: 201 });
+                    })["catch"](function (error) {
+                        return server_1.NextResponse.json({
+                            error: error
+                        });
                     })];
             case 2:
-                error_1 = _a.sent();
-                console.error(error_1);
-                return [2 /*return*/, server_1.NextResponse.json({
-                        message: "error",
-                        error: error_1
-                    })];
-            case 3: return [2 /*return*/];
+                data = _a.sent();
+                return [2 /*return*/, data];
         }
     });
 }); };

@@ -96,5 +96,16 @@ exports.ourFileRouter = {
                 return [2 /*return*/];
             });
         });
+    }),
+    trainingUploader: f({ image: { maxFileSize: "1MB" } })
+        // Set permissions and file types for this FileRoute
+        .onUploadComplete(function (_a) {
+        var metadata = _a.metadata, file = _a.file;
+        return __awaiter(void 0, void 0, void 0, function () {
+            return __generator(this, function (_b) {
+                console.log("file url", file.url, metadata);
+                return [2 /*return*/];
+            });
+        });
     })
 };

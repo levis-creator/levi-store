@@ -1,11 +1,11 @@
 "use client";
 import Heading from "@/components/back-office/Heading";
-import Button from "@/components/back-office/forms/Button";
-import ImageInput from "@/components/back-office/forms/ImageInput";
-import SelectInput from "@/components/back-office/forms/SelectInput";
-import TextAreaInput from "@/components/back-office/forms/TextAreaInput";
-import TextInput from "@/components/back-office/forms/TextInput";
-import ToggleInput from "@/components/back-office/forms/ToggleInput";
+import Button from "@/components/forms/Button";
+import ImageInput from "@/components/forms/ImageInput";
+import SelectInput from "@/components/forms/SelectInput";
+import TextAreaInput from "@/components/forms/TextAreaInput";
+import TextInput from "@/components/forms/TextInput";
+import ToggleInput from "@/components/forms/ToggleInput";
 import { makePostRequest } from "@/lib/apiRequest";
 import { generateSlug } from "@/lib/slugGenerator";
 import { Category, DummyData } from "@/lib/types";

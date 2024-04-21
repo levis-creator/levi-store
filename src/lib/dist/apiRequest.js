@@ -38,13 +38,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 exports.makePutRequest = exports.makePostRequest = void 0;
 var react_hot_toast_1 = require("react-hot-toast");
-function makePostRequest(setLoading, endpoint, data, resourceName, reset) {
+function makePostRequest(_a) {
+    var setLoading = _a.setLoading, endpoint = _a.endpoint, data = _a.data, resourceName = _a.resourceName, reset = _a.reset, redirect = _a.redirect;
     return __awaiter(this, void 0, void 0, function () {
         var baseUrl, response, error_1;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        return __generator(this, function (_b) {
+            switch (_b.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
+                    _b.trys.push([0, 2, , 3]);
                     setLoading(true);
                     baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
                     return [4 /*yield*/, fetch(baseUrl + "/" + endpoint, {
@@ -55,11 +56,12 @@ function makePostRequest(setLoading, endpoint, data, resourceName, reset) {
                             body: JSON.stringify(data)
                         })];
                 case 1:
-                    response = _a.sent();
+                    response = _b.sent();
                     if (response.ok) {
                         setLoading(false);
                         react_hot_toast_1["default"].success("New " + resourceName + " Created Successfully");
                         reset();
+                        redirect();
                     }
                     else {
                         setLoading(false);
@@ -72,7 +74,7 @@ function makePostRequest(setLoading, endpoint, data, resourceName, reset) {
                     }
                     return [3 /*break*/, 3];
                 case 2:
-                    error_1 = _a.sent();
+                    error_1 = _b.sent();
                     setLoading(false);
                     console.log(error_1);
                     return [3 /*break*/, 3];
@@ -82,13 +84,14 @@ function makePostRequest(setLoading, endpoint, data, resourceName, reset) {
     });
 }
 exports.makePostRequest = makePostRequest;
-function makePutRequest(setLoading, endpoint, data, resourceName, redirect) {
+function makePutRequest(_a) {
+    var setLoading = _a.setLoading, endpoint = _a.endpoint, data = _a.data, resourceName = _a.resourceName, redirect = _a.redirect;
     return __awaiter(this, void 0, void 0, function () {
         var baseUrl, response, error_2;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        return __generator(this, function (_b) {
+            switch (_b.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
+                    _b.trys.push([0, 2, , 3]);
                     setLoading(true);
                     baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
                     return [4 /*yield*/, fetch(baseUrl + "/" + endpoint, {
@@ -99,7 +102,7 @@ function makePutRequest(setLoading, endpoint, data, resourceName, redirect) {
                             body: JSON.stringify(data)
                         })];
                 case 1:
-                    response = _a.sent();
+                    response = _b.sent();
                     if (response.ok) {
                         console.log(response);
                         setLoading(false);
@@ -112,7 +115,7 @@ function makePutRequest(setLoading, endpoint, data, resourceName, redirect) {
                     }
                     return [3 /*break*/, 3];
                 case 2:
-                    error_2 = _a.sent();
+                    error_2 = _b.sent();
                     setLoading(false);
                     console.log(error_2);
                     return [3 /*break*/, 3];

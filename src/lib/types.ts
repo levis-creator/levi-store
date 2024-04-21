@@ -18,19 +18,17 @@ export type Category = {
   market?: string;
   imageUrl?: string;
   status?: boolean;
-  isPublished: boolean;
 };
 export type Coupon = {
   title: string;
   couponCode: string;
   expiryDate: string;
-  isPublished: boolean;
+  isActive: boolean;
 };
 export type Banner = {
   title: string;
   description: string;
   url: string;
-  status?: boolean;
   isPublished: boolean;
 };
 export type DummyData = {
@@ -68,4 +66,32 @@ export type Market = {
   description: string;
   logo: string;
   isActive: boolean;
+};
+
+export type Staff = {
+  name: string;
+  phone: string;
+  password: string;
+  email: string;
+  physicalAddress: string;
+  notes?: string;
+};
+
+export type Training = {
+  title: string;
+  slug: string;
+  description: string;
+  content: string;
+  categories: string;
+  thumbnail: string;
+  isPublished: boolean;
+};
+
+export type RequestParams = {
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  endpoint: string;
+  data: object;
+  resourceName: string;
+  reset: () => void;
+  redirect: () => void;
 };

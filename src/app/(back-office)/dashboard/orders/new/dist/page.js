@@ -38,11 +38,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var Heading_1 = require("@/components/back-office/Heading");
-var Button_1 = require("@/components/back-office/forms/Button");
-var ImageInput_1 = require("@/components/back-office/forms/ImageInput");
-var TextAreaInput_1 = require("@/components/back-office/forms/TextAreaInput");
-var TextInput_1 = require("@/components/back-office/forms/TextInput");
-var ToggleInput_1 = require("@/components/back-office/forms/ToggleInput");
+var Button_1 = require("@/components/forms/Button");
+var ImageInput_1 = require("@/components/forms/ImageInput");
+var TextAreaInput_1 = require("@/components/forms/TextAreaInput");
+var TextInput_1 = require("@/components/forms/TextInput");
+var ToggleInput_1 = require("@/components/forms/ToggleInput");
 var apiRequest_1 = require("@/lib/apiRequest");
 var navigation_1 = require("next/navigation");
 var react_1 = require("react");

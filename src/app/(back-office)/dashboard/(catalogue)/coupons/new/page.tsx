@@ -1,18 +1,18 @@
 "use client";
 import Heading from "@/components/back-office/Heading";
-import Button from "@/components/back-office/forms/Button";
-import TextInput from "@/components/back-office/forms/TextInput";
-import ToggleInput from "@/components/back-office/forms/ToggleInput";
+import Button from "@/components/forms/Button";
+import TextInput from "@/components/forms/TextInput";
+import ToggleInput from "@/components/forms/ToggleInput";
 import { makePostRequest } from "@/lib/apiRequest";
 import { generateCouponCode } from "@/lib/couponGenerator";
 import { Coupon } from "@/lib/types";
-import { useRouter } from "next/navigation";
-import { useRef, useState } from "react";
+import { redirect, useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 const Page = () => {
   const router = useRouter();
-  const couponCode = useRef<string>(generateCouponCode(8));
+  const couponCode = useRef<string>("");
   const {
     register,
     reset,
@@ -21,18 +21,29 @@ const Page = () => {
     handleSubmit,
   } = useForm<Coupon>({
     defaultValues: {
-      isPublished: true,
+      isActive: true,
     },
   });
-
   const [loading, setLoading] = useState<boolean>(false);
-  const isActive = watch("isPublished");
+  const isActive = watch("isActive");
+  useEffect(() => {
+    if (couponCode.current.length == 0) {
+      handleGenerate();
+    }
+  }, []);
 
   // this is handling submit
   const onSubmit: SubmitHandler<Coupon> = async (data) => {
     const couponCode = generateCouponCode(8);
     data.couponCode = couponCode;
-    await makePostRequest(setLoading, "api/coupons", data, "Coupon", reset);
+    await makePostRequest({
+      setLoading,
+      endpoint: "api/coupons",
+      data,
+      resourceName: "Coupon",
+      reset,
+      redirect: () => redirect("/dashboard/coupons"),
+    });
   };
 
   return (
@@ -54,13 +65,6 @@ const Page = () => {
             label="Coupon Title"
             register={register}
             errors={errors}
-          />
-          <TextInput
-            name="couponCode"
-            label="Coupon Code"
-            register={register}
-            errors={errors}
-            defaultValue={couponCode.current}
             className="w-full"
           />
           <TextInput
@@ -75,7 +79,7 @@ const Page = () => {
             trueTitle="Publish"
             falseTitle="Draft"
             label="Publish  Product"
-            name="isPublished"
+            name="isActive"
             register={register}
             isActive={isActive}
             checked={true}

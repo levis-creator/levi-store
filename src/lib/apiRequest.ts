@@ -1,13 +1,14 @@
-import React from "react";
 import toast from "react-hot-toast";
+import { RequestParams } from "./types";
 
-export async function makePostRequest(
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>,
-  endpoint: string,
-  data: object,
-  resourceName: string,
-  reset: () => void
-) {
+export async function makePostRequest({
+  setLoading,
+  endpoint,
+  data,
+  resourceName,
+  reset,
+  redirect,
+}: RequestParams) {
   try {
     setLoading(true);
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
@@ -23,6 +24,7 @@ export async function makePostRequest(
       setLoading(false);
       toast.success(`New ${resourceName} Created Successfully`);
       reset();
+      redirect();
     } else {
       setLoading(false);
       if (response.status === 409) {
@@ -37,13 +39,13 @@ export async function makePostRequest(
   }
 }
 
-export async function makePutRequest(
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>,
-  endpoint: string,
-  data: object,
-  resourceName: string,
-  redirect: () => void
-) {
+export async function makePutRequest({
+  setLoading,
+  endpoint,
+  data,
+  resourceName,
+  redirect,
+}: RequestParams) {
   try {
     setLoading(true);
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;

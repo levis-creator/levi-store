@@ -1,6 +1,7 @@
 "use client";
 import { NavigationItem } from "@/lib/types";
 import {
+  Building2,
   Compass,
   LayoutGrid,
   LogOut,
@@ -82,7 +83,12 @@ export let sideBarLinks: NavigationItem[] = [
     path: "/staff",
     icons: <User />,
   },
-
+  {
+    id: 7,
+    title: "Community",
+    path: "/community",
+    icons: <Building2 />,
+  },
   {
     id: 9,
     title: "Online Store",

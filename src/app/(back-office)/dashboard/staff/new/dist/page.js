@@ -38,28 +38,22 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var Heading_1 = require("@/components/back-office/Heading");
-var Button_1 = require("@/components/back-office/forms/Button");
-var TextAreaInput_1 = require("@/components/back-office/forms/TextAreaInput");
-var TextInput_1 = require("@/components/back-office/forms/TextInput");
-var ToggleInput_1 = require("@/components/back-office/forms/ToggleInput");
+var Button_1 = require("@/components/forms/Button");
+var TextAreaInput_1 = require("@/components/forms/TextAreaInput");
+var TextInput_1 = require("@/components/forms/TextInput");
 var apiRequest_1 = require("@/lib/apiRequest");
 var navigation_1 = require("next/navigation");
 var react_1 = require("react");
 var react_hook_form_1 = require("react-hook-form");
 var Page = function () {
     var router = navigation_1.useRouter();
-    var _a = react_hook_form_1.useForm({
-        defaultValues: {
-            isActive: true
-        }
-    }), register = _a.register, reset = _a.reset, watch = _a.watch, errors = _a.formState.errors, handleSubmit = _a.handleSubmit;
+    var _a = react_hook_form_1.useForm(), register = _a.register, reset = _a.reset, errors = _a.formState.errors, handleSubmit = _a.handleSubmit;
     var _b = react_1.useState(false), loading = _b[0], setLoading = _b[1];
-    var isActive = watch("isActive");
     // this is handling submit
     var onSubmit = function (data) { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, apiRequest_1.makePostRequest(setLoading, "api/Farmers", data, "Farmers", reset)];
+                case 0: return [4 /*yield*/, apiRequest_1.makePostRequest(setLoading, "api/staffs", data, "Staff", reset)];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];
@@ -67,19 +61,15 @@ var Page = function () {
         });
     }); };
     return (React.createElement("div", null,
-        React.createElement(Heading_1["default"], { title: "New Farmer", returnBtn: true, handleBack: router.back }),
+        React.createElement(Heading_1["default"], { title: "New Staff", returnBtn: true, handleBack: router.back }),
         React.createElement("form", { onSubmit: handleSubmit(onSubmit), className: "w-full max-w-4xl p-4 bg-white  errors border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3" },
             React.createElement("div", { className: "grid gap-4 sm:grid-cols-2 sm:gap-6" },
-                React.createElement(TextInput_1["default"], { name: "name", label: "Farmer's Full Name", register: register, errors: errors, className: "w-full" }),
-                React.createElement(TextInput_1["default"], { name: "phone", label: "Farmer's Phone", type: "tel", register: register, errors: errors, className: "w-full" }),
-                React.createElement(TextInput_1["default"], { label: "Farmer's Email Address", name: "email", type: "email", register: register, errors: errors, className: "w-full" }),
-                React.createElement(TextInput_1["default"], { label: "Farmer's Physical Address", name: "physicalAddress", register: register, errors: errors, className: "w-full" }),
-                React.createElement(TextInput_1["default"], { label: "Farmer's Contact Person", name: "contactPerson", register: register, errors: errors, className: "w-full" }),
-                " ",
-                React.createElement(TextInput_1["default"], { label: "Farmer's Contact Person Phone Number", name: "contactPersonPhone", register: register, errors: errors, className: "w-full", type: "tel" }),
-                React.createElement(TextAreaInput_1["default"], { label: "Farmer's Payment terms", name: "terms", register: register, errors: errors }),
-                React.createElement(TextAreaInput_1["default"], { label: "Notes", name: "notes", register: register, errors: errors, isRequired: false }),
-                React.createElement(ToggleInput_1["default"], { trueTitle: "Active", falseTitle: "Inactive", label: "Farmer status", name: "status", register: register, isActive: isActive, checked: true })),
-            React.createElement(Button_1["default"], { buttonTitle: "Create Farmer", loadTitle: "Creating...", isLoading: loading, type: "submit" }))));
+                React.createElement(TextInput_1["default"], { name: "name", label: "Staff's Full Name", register: register, errors: errors }),
+                React.createElement(TextInput_1["default"], { name: "password", label: "Staff's Password", register: register, errors: errors, className: "w-full" }),
+                React.createElement(TextInput_1["default"], { label: "Staff's Email Address", name: "email", type: "email", register: register, errors: errors, className: "w-full" }),
+                React.createElement(TextInput_1["default"], { name: "phone", label: "Staff's Phone", type: "tel", register: register, errors: errors, className: "w-full" }),
+                React.createElement(TextInput_1["default"], { label: "Staff's Physical Address", name: "physicalAddress", register: register, errors: errors, className: "w-full" }),
+                React.createElement(TextAreaInput_1["default"], { label: "Notes", name: "notes", register: register, errors: errors, isRequired: false })),
+            React.createElement(Button_1["default"], { buttonTitle: "Create Staff", loadTitle: "Creating...", isLoading: loading, type: "submit" }))));
 };
 exports["default"] = Page;

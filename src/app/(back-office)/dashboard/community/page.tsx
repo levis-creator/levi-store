@@ -6,15 +6,17 @@ import { Plus } from "lucide-react";
 const page = () => {
   const additionalBtn: NavigationItem = {
     icons: <Plus />,
-    title: "Add Staff",
-    path: "/dashboard/staff/new",
+    title: "Add Training",
+    path: "/dashboard/community/new",
   };
   return (
     <div>
       {/* header */}
-      <Heading title="Staffs" additionalBtn={additionalBtn} />
+      <Heading title="Community" additionalBtn={additionalBtn} />
       {/* table Actions*/}
       <TableAction />
+
+      {/* table */}
     </div>
   );
 };

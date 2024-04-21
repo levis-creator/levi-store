@@ -38,13 +38,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var Heading_1 = require("@/components/back-office/Heading");
-var TextInput_1 = require("@/components/back-office/forms/TextInput");
+var TextInput_1 = require("@/components/forms/TextInput");
 var react_hook_form_1 = require("react-hook-form");
 var react_1 = require("react");
-var Button_1 = require("@/components/back-office/forms/Button");
-var TextAreaInput_1 = require("@/components/back-office/forms/TextAreaInput");
+var Button_1 = require("@/components/forms/Button");
+var TextAreaInput_1 = require("@/components/forms/TextAreaInput");
 var navigation_1 = require("next/navigation");
-var ImageInput_1 = require("@/components/back-office/forms/ImageInput");
+var ImageInput_1 = require("@/components/forms/ImageInput");
 var apiRequest_1 = require("@/lib/apiRequest");
 var Page = function () {
     var router = navigation_1.useRouter();

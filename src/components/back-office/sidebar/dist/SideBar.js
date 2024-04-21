@@ -73,6 +73,12 @@ exports.sideBarLinks = [
         icons: React.createElement(lucide_react_1.User, null)
     },
     {
+        id: 7,
+        title: "Community",
+        path: "/community",
+        icons: React.createElement(lucide_react_1.Building2, null)
+    },
+    {
         id: 9,
         title: "Online Store",
         path: "/staff",

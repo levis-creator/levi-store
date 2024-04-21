@@ -1,9 +1,9 @@
 "use client";
 import Heading from "@/components/back-office/Heading";
-import Button from "@/components/back-office/forms/Button";
-import TextAreaInput from "@/components/back-office/forms/TextAreaInput";
-import TextInput from "@/components/back-office/forms/TextInput";
-import ToggleInput from "@/components/back-office/forms/ToggleInput";
+import Button from "@/components/forms/Button";
+import TextAreaInput from "@/components/forms/TextAreaInput";
+import TextInput from "@/components/forms/TextInput";
+import ToggleInput from "@/components/forms/ToggleInput";
 import { makePostRequest } from "@/lib/apiRequest";
 import { Farmer } from "@/lib/types";
 import { useRouter } from "next/navigation";
@@ -28,7 +28,7 @@ const Page = () => {
 
   // this is handling submit
   const onSubmit: SubmitHandler<Farmer> = async (data) => {
-    await makePostRequest(setLoading, "api/Farmers", data, "Farmers", reset);
+    await makePostRequest(setLoading, "api/farmers", data, "Farmers", reset);
   };
 
   return (

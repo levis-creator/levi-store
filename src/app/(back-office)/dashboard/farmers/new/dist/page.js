@@ -38,10 +38,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var Heading_1 = require("@/components/back-office/Heading");
-var Button_1 = require("@/components/back-office/forms/Button");
-var TextAreaInput_1 = require("@/components/back-office/forms/TextAreaInput");
-var TextInput_1 = require("@/components/back-office/forms/TextInput");
-var ToggleInput_1 = require("@/components/back-office/forms/ToggleInput");
+var Button_1 = require("@/components/forms/Button");
+var TextAreaInput_1 = require("@/components/forms/TextAreaInput");
+var TextInput_1 = require("@/components/forms/TextInput");
+var ToggleInput_1 = require("@/components/forms/ToggleInput");
 var apiRequest_1 = require("@/lib/apiRequest");
 var navigation_1 = require("next/navigation");
 var react_1 = require("react");
@@ -59,7 +59,7 @@ var Page = function () {
     var onSubmit = function (data) { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, apiRequest_1.makePostRequest(setLoading, "api/Farmers", data, "Farmers", reset)];
+                case 0: return [4 /*yield*/, apiRequest_1.makePostRequest(setLoading, "api/farmers", data, "Farmers", reset)];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];

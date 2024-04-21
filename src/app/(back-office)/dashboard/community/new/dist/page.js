@@ -39,43 +39,59 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 var Heading_1 = require("@/components/back-office/Heading");
 var Button_1 = require("@/components/forms/Button");
+var ImageInput_1 = require("@/components/forms/ImageInput");
+var RichTextInput_1 = require("@/components/forms/RichTextInput");
+var SelectInput_1 = require("@/components/forms/SelectInput");
+var TextAreaInput_1 = require("@/components/forms/TextAreaInput");
 var TextInput_1 = require("@/components/forms/TextInput");
 var ToggleInput_1 = require("@/components/forms/ToggleInput");
 var apiRequest_1 = require("@/lib/apiRequest");
-var couponGenerator_1 = require("@/lib/couponGenerator");
+var slugGenerator_1 = require("@/lib/slugGenerator");
 var navigation_1 = require("next/navigation");
 var react_1 = require("react");
 var react_hook_form_1 = require("react-hook-form");
 var Page = function () {
     var router = navigation_1.useRouter();
-    var couponCode = react_1.useRef("");
     var _a = react_hook_form_1.useForm({
         defaultValues: {
-            isActive: true
+            isPublished: true
         }
     }), register = _a.register, reset = _a.reset, watch = _a.watch, errors = _a.formState.errors, handleSubmit = _a.handleSubmit;
-    var _b = react_1.useState(false), loading = _b[0], setLoading = _b[1];
-    var isActive = watch("isActive");
-    react_1.useEffect(function () {
-        if (couponCode.current.length == 0) {
-            handleGenerate();
-        }
-    }, []);
+    var _b = react_1.useState(""), imageUrl = _b[0], setImageUrl = _b[1];
+    var _c = react_1.useState(false), loading = _c[0], setLoading = _c[1];
+    var _d = react_1.useState(""), content = _d[0], setContent = _d[1];
+    var isActive = watch("isPublished");
+    var category = [
+        {
+            id: "1",
+            title: "Market 1"
+        },
+        {
+            id: "2",
+            title: "Market 2"
+        },
+        {
+            id: "3",
+            title: "Market 3"
+        },
+        {
+            id: "4",
+            title: "Market 4"
+        },
+    ];
     // this is handling submit
     var onSubmit = function (data) { return __awaiter(void 0, void 0, void 0, function () {
-        var couponCode;
+        var slug;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    couponCode = couponGenerator_1.generateCouponCode(8);
-                    data.couponCode = couponCode;
-                    return [4 /*yield*/, apiRequest_1.makePostRequest({
-                            setLoading: setLoading,
-                            endpoint: "api/coupons",
-                            data: data,
-                            resourceName: "Coupon",
-                            reset: reset,
-                            redirect: function () { return navigation_1.redirect("/dashboard/coupons"); }
+                    slug = slugGenerator_1.generateSlug(data.title);
+                    data.slug = slug;
+                    data.thumbnail = imageUrl;
+                    data.content = content;
+                    return [4 /*yield*/, apiRequest_1.makePostRequest(setLoading, "api/training", data, "Training", reset).then(function () {
+                            setImageUrl("");
+                            setContent("");
                         })];
                 case 1:
                     _a.sent();
@@ -84,12 +100,15 @@ var Page = function () {
         });
     }); };
     return (React.createElement("div", null,
-        React.createElement(Heading_1["default"], { title: "New Coupon", returnBtn: true, handleBack: function () { return router.back(); } }),
+        React.createElement(Heading_1["default"], { title: "New Training", returnBtn: true, handleBack: function () { return router.back(); } }),
         React.createElement("form", { onSubmit: handleSubmit(onSubmit), className: "w-full max-w-4xl p-4 bg-white  errors border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3" },
             React.createElement("div", { className: "grid gap-4 sm:grid-cols-2 sm:gap-6" },
-                React.createElement(TextInput_1["default"], { name: "title", label: "Coupon Title", register: register, errors: errors, className: "w-full" }),
-                React.createElement(TextInput_1["default"], { name: "expiryDate", label: "Category Expiry Date", register: register, errors: errors, type: "date", className: "w-full" }),
-                React.createElement(ToggleInput_1["default"], { trueTitle: "Publish", falseTitle: "Draft", label: "Publish  Product", name: "isActive", register: register, isActive: isActive, checked: true })),
-            React.createElement(Button_1["default"], { buttonTitle: "Create Coupon", loadTitle: "Creating...", isLoading: loading, type: "submit" }))));
+                React.createElement(TextInput_1["default"], { name: "title", label: "Training Title", register: register, errors: errors, className: "w-full" }),
+                React.createElement(SelectInput_1["default"], { label: "Select Category", name: "category", register: register, options: category, className: "w-full" }),
+                React.createElement(TextAreaInput_1["default"], { label: "Training Description", name: "description", register: register, errors: errors }),
+                React.createElement(ImageInput_1["default"], { label: "Training Image", setImageUrl: setImageUrl, imageUrl: imageUrl, endpoint: "trainingUploader" }),
+                React.createElement(RichTextInput_1["default"], { content: content, onChange: setContent, label: "Training Content" }),
+                React.createElement(ToggleInput_1["default"], { trueTitle: "Publish", falseTitle: "Draft", label: "Publish Training", name: "isPublished", register: register, isActive: isActive, checked: true })),
+            React.createElement(Button_1["default"], { buttonTitle: "Create Training", loadTitle: "Creating...", isLoading: loading, type: "submit" }))));
 };
 exports["default"] = Page;
