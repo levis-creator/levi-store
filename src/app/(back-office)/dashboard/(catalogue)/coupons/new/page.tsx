@@ -28,22 +28,21 @@ const Page = () => {
   const isActive = watch("isActive");
   useEffect(() => {
     if (couponCode.current.length == 0) {
-      handleGenerate();
+      couponCode.current = generateCouponCode(8);
     }
   }, []);
 
   // this is handling submit
   const onSubmit: SubmitHandler<Coupon> = async (data) => {
-    const couponCode = generateCouponCode(8);
-    data.couponCode = couponCode;
+    data.couponCode = couponCode.current;
     await makePostRequest({
       setLoading,
       endpoint: "api/coupons",
       data,
       resourceName: "Coupon",
       reset,
-      redirect: () => redirect("/dashboard/coupons"),
-    });
+      redirect: () => router.push("/dashboard/coupons"),
+    }).then(() => (couponCode.current = ""));
   };
 
   return (

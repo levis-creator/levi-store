@@ -15,9 +15,9 @@ export type Category = {
   title: string;
   description: string;
   slug: string;
-  market?: string;
   imageUrl?: string;
   status?: boolean;
+  markets:String[];
 };
 export type Coupon = {
   title: string;
@@ -40,7 +40,7 @@ export type Product = {
   description: string;
   slug: string;
   images?: string[];
-  category?: string;
+  category?: string[];
   sku?: string;
   barcode: string;
   productPrice: number;

@@ -23,12 +23,12 @@ const Page = () => {
     handleSubmit,
   } = useForm<Category>({
     defaultValues: {
-      isPublished: true,
+      status: true,
     },
   });
   const [imageUrl, setImageUrl] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const isActive = watch("isPublished");
+  const isActive = watch("status");
 
   const market: DummyData[] = [
     {
@@ -83,14 +83,6 @@ const Page = () => {
             errors={errors}
             className="w-full"
           />
-          <SelectInput
-            label="Select Market"
-            name="market"
-            register={register}
-            options={market}
-            multiple={true}
-            className="w-full"
-          />
           <TextAreaInput
             label="Category Description"
             name="description"
@@ -107,7 +99,7 @@ const Page = () => {
             trueTitle="Publish"
             falseTitle="Draft"
             label="Publish category"
-            name="isPublished"
+            name="status"
             register={register}
             isActive={isActive}
             checked={true}

@@ -50,7 +50,7 @@ exports.POST = function (request) { return __awaiter(void 0, void 0, void 0, fun
                         body: JSON.stringify(body),
                         headers: { "Content-Type": "application/json" }
                     })
-                        .then(function (data) {
+                        .then(function () {
                         return new Response("success", { status: 201 });
                     })["catch"](function (error) {
                         return server_1.NextResponse.json({

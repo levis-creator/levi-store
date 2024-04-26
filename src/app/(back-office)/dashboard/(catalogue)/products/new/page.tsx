@@ -35,13 +35,14 @@ const Page = () => {
   const onSubmit: SubmitHandler<Product> = async (data) => {
     data.images = [imageUrl];
     data.tags = tags;
-    await makePostRequest(
+    await makePostRequest({
       setLoading,
-      "api/products",
+      endpoint: "api/products",
       data,
-      "Product",
-      reset
-    ).then(() => setImageUrl(""));
+      resourceName: "Product",
+      reset,
+      redirect: () => router.push("/dashboard/products"),
+    }).then(() => setImageUrl(""));
   };
   const categories: DummyData[] = [
     {

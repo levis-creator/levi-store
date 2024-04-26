@@ -40,7 +40,6 @@ exports.__esModule = true;
 var Heading_1 = require("@/components/back-office/Heading");
 var Button_1 = require("@/components/forms/Button");
 var ImageInput_1 = require("@/components/forms/ImageInput");
-var SelectInput_1 = require("@/components/forms/SelectInput");
 var TextAreaInput_1 = require("@/components/forms/TextAreaInput");
 var TextInput_1 = require("@/components/forms/TextInput");
 var ToggleInput_1 = require("@/components/forms/ToggleInput");
@@ -53,12 +52,12 @@ var Page = function () {
     var router = navigation_1.useRouter();
     var _a = react_hook_form_1.useForm({
         defaultValues: {
-            isPublished: true
+            status: true
         }
     }), register = _a.register, reset = _a.reset, watch = _a.watch, errors = _a.formState.errors, handleSubmit = _a.handleSubmit;
     var _b = react_1.useState(""), imageUrl = _b[0], setImageUrl = _b[1];
     var _c = react_1.useState(false), loading = _c[0], setLoading = _c[1];
-    var isActive = watch("isPublished");
+    var isActive = watch("status");
     var market = [
         {
             id: "1",
@@ -98,10 +97,9 @@ var Page = function () {
         React.createElement("form", { onSubmit: handleSubmit(onSubmit), className: "w-full max-w-4xl p-4 bg-white  errors border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3" },
             React.createElement("div", { className: "grid gap-4 sm:grid-cols-2 sm:gap-6" },
                 React.createElement(TextInput_1["default"], { name: "title", label: "Category Title", register: register, errors: errors, className: "w-full" }),
-                React.createElement(SelectInput_1["default"], { label: "Select Market", name: "market", register: register, options: market, multiple: true, className: "w-full" }),
                 React.createElement(TextAreaInput_1["default"], { label: "Category Description", name: "description", register: register, errors: errors }),
                 React.createElement(ImageInput_1["default"], { label: "Category Image", setImageUrl: setImageUrl, imageUrl: imageUrl, endpoint: "categoryUploader" }),
-                React.createElement(ToggleInput_1["default"], { trueTitle: "Publish", falseTitle: "Draft", label: "Publish category", name: "isPublished", register: register, isActive: isActive, checked: true })),
+                React.createElement(ToggleInput_1["default"], { trueTitle: "Publish", falseTitle: "Draft", label: "Publish category", name: "status", register: register, isActive: isActive, checked: true })),
             React.createElement(Button_1["default"], { buttonTitle: "Create Category", loadTitle: "Creating...", isLoading: loading, type: "submit" }))));
 };
 exports["default"] = Page;

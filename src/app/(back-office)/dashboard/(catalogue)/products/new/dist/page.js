@@ -68,7 +68,14 @@ var Page = function () {
                 case 0:
                     data.images = [imageUrl];
                     data.tags = tags;
-                    return [4 /*yield*/, apiRequest_1.makePostRequest(setLoading, "api/products", data, "Product", reset).then(function () { return setImageUrl(""); })];
+                    return [4 /*yield*/, apiRequest_1.makePostRequest({
+                            setLoading: setLoading,
+                            endpoint: "api/products",
+                            data: data,
+                            resourceName: "Product",
+                            reset: reset,
+                            redirect: function () { return router.push("/dashboard/products"); }
+                        }).then(function () { return setImageUrl(""); })];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];

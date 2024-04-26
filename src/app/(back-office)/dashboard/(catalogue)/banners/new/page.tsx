@@ -37,7 +37,7 @@ const Page = () => {
       data,
       resourceName: "Banners",
       reset,
-      redirect: () => redirect("/dashboard/banners"),
+      redirect: () => router.push("/dashboard/banners"),
     }).then(() => setImageUrl(""));
   };
 

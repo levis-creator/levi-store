@@ -1,5 +1,4 @@
 import { Coupon } from "@/lib/types";
-import { error } from "console";
 import { NextResponse } from "next/server";
 
 export const POST = async (request: Request) => {
@@ -9,7 +8,7 @@ export const POST = async (request: Request) => {
     body: JSON.stringify(body),
     headers: { "Content-Type": "application/json" },
   })
-    .then((data) => {
+    .then(() => {
       return new Response("success", { status: 201 });
     })
     .catch((error) =>

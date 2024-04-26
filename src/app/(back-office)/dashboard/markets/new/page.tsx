@@ -58,6 +58,7 @@ const Page = () => {
             register={register}
             errors={errors}
           />
+                    
 
           <TextAreaInput
             label="Market Description"

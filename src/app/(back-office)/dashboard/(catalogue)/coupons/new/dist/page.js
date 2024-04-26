@@ -58,25 +58,23 @@ var Page = function () {
     var isActive = watch("isActive");
     react_1.useEffect(function () {
         if (couponCode.current.length == 0) {
-            handleGenerate();
+            couponCode.current = couponGenerator_1.generateCouponCode(8);
         }
     }, []);
     // this is handling submit
     var onSubmit = function (data) { return __awaiter(void 0, void 0, void 0, function () {
-        var couponCode;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    couponCode = couponGenerator_1.generateCouponCode(8);
-                    data.couponCode = couponCode;
+                    data.couponCode = couponCode.current;
                     return [4 /*yield*/, apiRequest_1.makePostRequest({
                             setLoading: setLoading,
                             endpoint: "api/coupons",
                             data: data,
                             resourceName: "Coupon",
                             reset: reset,
-                            redirect: function () { return navigation_1.redirect("/dashboard/coupons"); }
-                        })];
+                            redirect: function () { return router.push("/dashboard/coupons"); }
+                        }).then(function () { return (couponCode.current = ""); })];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];

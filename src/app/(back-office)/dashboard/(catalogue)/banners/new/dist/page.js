@@ -69,7 +69,7 @@ var Page = function () {
                             data: data,
                             resourceName: "Banners",
                             reset: reset,
-                            redirect: function () { return navigation_1.redirect("/dashboard/banners"); }
+                            redirect: function () { return router.push("/dashboard/banners"); }
                         }).then(function () { return setImageUrl(""); })];
                 case 1:
                     _a.sent();
