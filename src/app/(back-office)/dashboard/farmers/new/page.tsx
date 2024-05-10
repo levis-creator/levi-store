@@ -28,7 +28,14 @@ const Page = () => {
 
   // this is handling submit
   const onSubmit: SubmitHandler<Farmer> = async (data) => {
-    await makePostRequest(setLoading, "api/farmers", data, "Farmers", reset);
+    await makePostRequest({
+      setLoading,
+      endpoint: "api/farmers",
+      data,
+      resourceName: "Farmers",
+      reset,
+      redirect: () => router.push("/dashboard/farmers"),
+    });
   };
 
   return (
@@ -91,6 +98,7 @@ const Page = () => {
             name="terms"
             register={register}
             errors={errors}
+            isRequired={false}
           />
           <TextAreaInput
             label="Notes"

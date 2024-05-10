@@ -45,7 +45,7 @@ exports.POST = function (request) { return __awaiter(void 0, void 0, void 0, fun
             case 0: return [4 /*yield*/, request.json()];
             case 1:
                 body = _a.sent();
-                return [4 /*yield*/, fetch(process.env.NEXT_PUBLIC_API_BASE_URL + "/farmers", {
+                return [4 /*yield*/, fetch(process.env.NEXT_PUBLIC_API_BASE_URL + "/markets", {
                         method: "POST",
                         body: JSON.stringify(body),
                         headers: { "Content-Type": "application/json" }

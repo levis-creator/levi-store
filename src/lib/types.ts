@@ -12,12 +12,13 @@ export type NavigationItem = {
   path: string | any[];
 };
 export type Category = {
+  id?: number | string;
   title: string;
   description: string;
   slug: string;
   imageUrl?: string;
   status?: boolean;
-  markets:String[];
+  markets: string[];
 };
 export type Coupon = {
   title: string;
@@ -31,8 +32,8 @@ export type Banner = {
   url: string;
   isPublished: boolean;
 };
-export type DummyData = {
-  id: string;
+export type SimplifiedData = {
+  id: string | number;
   title: string;
 };
 export type Product = {
@@ -48,8 +49,14 @@ export type Product = {
   farmer: string;
   tags: string[];
   isPublished: boolean;
+  isWholeSale: boolean;
+  wholeSalePrice: number;
+  minWholeSaleQuantity: number;
+  unit: string;
+  qty: number;
 };
 export type Farmer = {
+  id?: string;
   name: string;
   phone: string;
   email: string;
@@ -66,6 +73,7 @@ export type Market = {
   description: string;
   logo: string;
   isActive: boolean;
+  categories: number[];
 };
 
 export type Staff = {

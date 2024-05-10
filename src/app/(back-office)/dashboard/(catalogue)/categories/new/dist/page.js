@@ -58,24 +58,24 @@ var Page = function () {
     var _b = react_1.useState(""), imageUrl = _b[0], setImageUrl = _b[1];
     var _c = react_1.useState(false), loading = _c[0], setLoading = _c[1];
     var isActive = watch("status");
-    var market = [
-        {
-            id: "1",
-            title: "Market 1"
-        },
-        {
-            id: "2",
-            title: "Market 2"
-        },
-        {
-            id: "3",
-            title: "Market 3"
-        },
-        {
-            id: "4",
-            title: "Market 4"
-        },
-    ];
+    // const market: DummyData[] = [
+    //   {
+    //     id: "1",
+    //     title: "Market 1",
+    //   },
+    //   {
+    //     id: "2",
+    //     title: "Market 2",
+    //   },
+    //   {
+    //     id: "3",
+    //     title: "Market 3",
+    //   },
+    //   {
+    //     id: "4",
+    //     title: "Market 4",
+    //   },
+    // ];
     // this is handling submit
     var onSubmit = function (data) { return __awaiter(void 0, void 0, void 0, function () {
         var slug;
@@ -85,7 +85,14 @@ var Page = function () {
                     slug = slugGenerator_1.generateSlug(data.title);
                     data.slug = slug;
                     data.imageUrl = imageUrl;
-                    return [4 /*yield*/, apiRequest_1.makePostRequest(setLoading, "api/categories", data, "Category", reset).then(function () { return setImageUrl(""); })];
+                    return [4 /*yield*/, apiRequest_1.makePostRequest({
+                            setLoading: setLoading,
+                            endpoint: "api/categories",
+                            data: data,
+                            resourceName: "Category",
+                            reset: reset,
+                            redirect: function () { return router.push("/dashboard/categories"); }
+                        }).then(function () { return setImageUrl(""); })];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];
@@ -96,7 +103,7 @@ var Page = function () {
         React.createElement(Heading_1["default"], { title: "New category", returnBtn: true, handleBack: function () { return router.back(); } }),
         React.createElement("form", { onSubmit: handleSubmit(onSubmit), className: "w-full max-w-4xl p-4 bg-white  errors border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3" },
             React.createElement("div", { className: "grid gap-4 sm:grid-cols-2 sm:gap-6" },
-                React.createElement(TextInput_1["default"], { name: "title", label: "Category Title", register: register, errors: errors, className: "w-full" }),
+                React.createElement(TextInput_1["default"], { name: "title", label: "Category Title", register: register, errors: errors }),
                 React.createElement(TextAreaInput_1["default"], { label: "Category Description", name: "description", register: register, errors: errors }),
                 React.createElement(ImageInput_1["default"], { label: "Category Image", setImageUrl: setImageUrl, imageUrl: imageUrl, endpoint: "categoryUploader" }),
                 React.createElement(ToggleInput_1["default"], { trueTitle: "Publish", falseTitle: "Draft", label: "Publish category", name: "status", register: register, isActive: isActive, checked: true })),

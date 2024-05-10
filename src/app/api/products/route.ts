@@ -8,8 +8,8 @@ export const POST = async (request: Request) => {
     body: JSON.stringify(body),
     headers: { "Content-Type": "application/json" },
   })
-    .then(() => {
-      return new Response("success", { status: 201 });
+    .then((res) => {
+      return new Response("", { status: res.status });
     })
     .catch((error) =>
       NextResponse.json({
@@ -17,4 +17,24 @@ export const POST = async (request: Request) => {
       })
     );
   return data;
+};
+export const GET = async (request: Request) => {
+  try {
+    const data = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/products`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((data) => {
+      return data.json();
+    });
+    return Response.json(data);
+  } catch (error) {
+    NextResponse.json({
+      error,
+    });
+  }
 };

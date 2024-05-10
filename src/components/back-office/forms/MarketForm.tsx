@@ -2,17 +2,19 @@
 import Heading from "@/components/back-office/Heading";
 import Button from "@/components/forms/Button";
 import ImageInput from "@/components/forms/ImageInput";
+import SelectInput from "@/components/forms/SelectInput";
 import TextAreaInput from "@/components/forms/TextAreaInput";
 import TextInput from "@/components/forms/TextInput";
 import ToggleInput from "@/components/forms/ToggleInput";
 import { makePostRequest } from "@/lib/apiRequest";
-import { generateSlug } from "@/lib/slugGenerator";
-import { Category } from "@/lib/types";
+import { SimplifiedData, Market } from "@/lib/types";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-const Page = () => {
+const MarketForm: FC<{
+  categories: SimplifiedData[];
+}> = ({ categories }) => {
   const router = useRouter();
   const {
     register,
@@ -20,56 +22,32 @@ const Page = () => {
     watch,
     formState: { errors },
     handleSubmit,
-  } = useForm<Category>({
+  } = useForm<Market>({
     defaultValues: {
-      status: true,
+      isActive: true,
     },
   });
   const [imageUrl, setImageUrl] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const isActive = watch("status");
+  const isActive = watch("isActive");
 
-  // const market: DummyData[] = [
-  //   {
-  //     id: "1",
-  //     title: "Market 1",
-  //   },
-  //   {
-  //     id: "2",
-  //     title: "Market 2",
-  //   },
-  //   {
-  //     id: "3",
-  //     title: "Market 3",
-  //   },
-  //   {
-  //     id: "4",
-  //     title: "Market 4",
-  //   },
-  // ];
   // this is handling submit
-  const onSubmit: SubmitHandler<Category> = async (data) => {
-    const slug = generateSlug(data.title);
-    data.slug = slug;
-    data.imageUrl = imageUrl;
+  const onSubmit: SubmitHandler<Market> = async (data) => {
+    data.logo = imageUrl;
     await makePostRequest({
       setLoading,
-      endpoint: "api/categories",
+      endpoint: "api/markets",
       data,
-      resourceName: "Category",
+      resourceName: "Markets",
       reset,
-      redirect: () => router.push("/dashboard/categories"),
+      redirect: () => router.push("/dashboard/markets"),
     }).then(() => setImageUrl(""));
   };
 
   return (
     <div>
       {/* header */}
-      <Heading
-        title="New category"
-        returnBtn={true}
-        handleBack={() => router.back()}
-      />
+      <Heading title="New Market" returnBtn={true} handleBack={router.back} />
       {/* table */}
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -78,34 +56,43 @@ const Page = () => {
         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
           <TextInput
             name="title"
-            label="Category Title"
+            label="Market Title"
             register={register}
             errors={errors}
+            className="w-full"
+          />
+          <SelectInput
+            label="Select Categories"
+            name="categories"
+            register={register}
+            options={categories}
+            multiple={true}
+            className="w-full"
           />
           <TextAreaInput
-            label="Category Description"
+            label="Market Description"
             name="description"
             register={register}
             errors={errors}
           />
           <ImageInput
-            label="Category Image"
+            label="Market Logo"
             setImageUrl={setImageUrl}
             imageUrl={imageUrl}
-            endpoint="categoryUploader"
+            endpoint="marketUploader"
           />
           <ToggleInput
-            trueTitle="Publish"
+            trueTitle="Active"
             falseTitle="Draft"
-            label="Publish category"
-            name="status"
+            label="Market status"
+            name="isActive"
             register={register}
             isActive={isActive}
             checked={true}
           />
         </div>
         <Button
-          buttonTitle="Create Category"
+          buttonTitle="Create Market"
           loadTitle="Creating..."
           isLoading={loading}
           type="submit"
@@ -115,4 +102,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default MarketForm;

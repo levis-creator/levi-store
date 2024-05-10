@@ -1,14 +1,14 @@
-import { Coupon } from "@/lib/types";
+import { Market } from "@/lib/types";
 import { NextResponse } from "next/server";
 
 export const POST = async (request: Request) => {
-  const body: Coupon = await request.json();
-  const data = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/coupons`, {
+  const body: Market = await request.json();
+  const data = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/markets`, {
     method: "POST",
     body: JSON.stringify(body),
     headers: { "Content-Type": "application/json" },
   })
-    .then(() => {
+    .then((data) => {
       return new Response("success", { status: 201 });
     })
     .catch((error) =>
@@ -18,10 +18,11 @@ export const POST = async (request: Request) => {
     );
   return data;
 };
+
 export const GET = async (request: Request) => {
   try {
     const data = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/coupons`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/markets`,
       {
         method: "GET",
         headers: {

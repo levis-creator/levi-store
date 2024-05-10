@@ -59,7 +59,14 @@ var Page = function () {
     var onSubmit = function (data) { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, apiRequest_1.makePostRequest(setLoading, "api/farmers", data, "Farmers", reset)];
+                case 0: return [4 /*yield*/, apiRequest_1.makePostRequest({
+                        setLoading: setLoading,
+                        endpoint: "api/farmers",
+                        data: data,
+                        resourceName: "Farmers",
+                        reset: reset,
+                        redirect: function () { return router.push("/dashboard/farmers"); }
+                    })];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];
@@ -77,7 +84,7 @@ var Page = function () {
                 React.createElement(TextInput_1["default"], { label: "Farmer's Contact Person", name: "contactPerson", register: register, errors: errors, className: "w-full" }),
                 " ",
                 React.createElement(TextInput_1["default"], { label: "Farmer's Contact Person Phone Number", name: "contactPersonPhone", register: register, errors: errors, className: "w-full", type: "tel" }),
-                React.createElement(TextAreaInput_1["default"], { label: "Farmer's Payment terms", name: "terms", register: register, errors: errors }),
+                React.createElement(TextAreaInput_1["default"], { label: "Farmer's Payment terms", name: "terms", register: register, errors: errors, isRequired: false }),
                 React.createElement(TextAreaInput_1["default"], { label: "Notes", name: "notes", register: register, errors: errors, isRequired: false }),
                 React.createElement(ToggleInput_1["default"], { trueTitle: "Active", falseTitle: "Inactive", label: "Farmer status", name: "status", register: register, isActive: isActive, checked: true })),
             React.createElement(Button_1["default"], { buttonTitle: "Create Farmer", loadTitle: "Creating...", isLoading: loading, type: "submit" }))));

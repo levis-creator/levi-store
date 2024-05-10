@@ -28,11 +28,12 @@ export async function makePostRequest({
     } else {
       setLoading(false);
       if (response.status === 409) {
-        toast.error("The Giving Warehouse Stock is NOT Enough");
+        toast.error("Already exists");
       } else {
         toast.error("Something Went wrong");
       }
     }
+    console.log(response.status);
   } catch (error) {
     setLoading(false);
     console.log(error);
